@@ -8,5 +8,27 @@
     <body>
         <h1><%=user.name%> Dashboard</h1>
         <a href="/logout">LOG OUT</a>
+
+        <h1>Posts</h1>
+        <% if(posts) { %> <% posts.forEach(function(post) { %>
+        <div>
+            <h3><%= post.author.username %></h3>
+            <p><em>(<%=post.timestamp%>)</em></p>
+            <p><%= post.post %></p>
+        </div>
+        <% }) %> <% } %>
+
+        <h1>New Post</h1>
+        <form action="" method="POST">
+            <label for="post">Post</label>
+            <textarea
+                name="post"
+                id="post"
+                cols="30"
+                rows="10"
+                required
+            ></textarea>
+            <button type="submit">Submit</button>
+        </form>
     </body>
 </html>
