@@ -3,12 +3,12 @@ const router = express.Router();
 
 /* GET home page. */
 router.get("/", (req, res, next) => {
-    // See if user is still logged in
-    if (req.user) {
-        return res.redirect("/dashboard");
+    // Make sure user is logged in
+    if (!req.user) {
+        return res.redirect("/");
     }
 
-    res.render("index", { title: "Index" });
+    res.render("dashboard", { title: "Dashboard", user: req.user });
 });
 
 module.exports = router;

@@ -8,12 +8,7 @@
     </head>
     <body>
         <h1><%= title %></h1>
-        <% if (user) { %>
-        <p><%= user.name %></p>
-        <a href="/logout">LOG OUT</a>
-        <% } else { %>
         <a href="/login">Log-In</a>
         <a href="/signup">Sign up</a>
-        <% } %>
     </body>
 </html>
