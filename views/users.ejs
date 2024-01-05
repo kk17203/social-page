@@ -8,12 +8,26 @@
     </head>
     <body>
         <h1><%= title %></h1>
-        <% if(users) { %> <% users.forEach(function(user) { %>
+        <a href="/dashboard">Dashboard</a>
+        <% if(users) { %> <% users.forEach(function(user) { %> <%
+        if(currentUser._id.toString() !== user._id.toString()) { %>
         <div>
             <h3>Username: <%=user.username%></h3>
             <p>First Name: <%=user.first_name%></p>
             <p>Last Name: <%=user.last_name%></p>
+            <% if(!currentUser.followed.includes(user._id)) { %>
+            <form action="" method="POST">
+                <input
+                    type="hidden"
+                    name="userToFollow"
+                    value="<%=user._id%>"
+                />
+                <button type="submit">Follow</button>
+            </form>
+            <% } else { %>
+            <p>Already Following</p>
+            <% } %>
         </div>
-        <% })} %>
+        <% } %> <% })} %>
     </body>
 </html>

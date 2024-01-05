@@ -14,7 +14,28 @@ router.get(
 
         const users = await User.find({}).exec();
 
-        res.render("users", { title: "Users Page", users: users });
+        res.render("users", {
+            title: "Users Page",
+            users: users,
+            currentUser: req.user,
+        });
+    })
+);
+
+// POST for follow request
+router.post(
+    "/",
+    asyncHandler(async (req, res, next) => {
+        const currentUser = req.user;
+        const userToFollow = req.body.userToFollow;
+
+        // Check if already followed in array
+        if (!currentUser.followed.includes(userToFollow)) {
+            // Add user to followed array
+            currentUser.followed.push(userToFollow);
+            await currentUser.save();
+        }
+        res.redirect("/users");
     })
 );
 
