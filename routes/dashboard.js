@@ -67,4 +67,23 @@ router.post(
     })
 );
 
+// POST for post likes
+router.post(
+    "/likes",
+    asyncHandler(async (req, res, next) => {
+        const postId = req.body.postId; // retrieve related postId from form (saves as a string)
+        const currentUser = req.user._id; // define current users id
+
+        const post = await Post.findById(postId); // find the actual post that matches the postId provided by form
+
+        // Check if current user already liked post
+        if (!post.likes.includes(currentUser)) {
+            // Add user to likes array
+            post.likes.push(currentUser);
+            await post.save();
+        }
+        res.redirect("/dashboard");
+    })
+);
+
 module.exports = router;

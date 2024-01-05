@@ -16,6 +16,16 @@
             <h3>Post Author: <%= post.author.username %></h3>
             <p><em>(<%=post.timestamp%>)</em></p>
             <p><%= post.post %></p>
+            <form action="/dashboard/likes" method="POST">
+                <input
+                    type="hidden"
+                    name="userWhoLikes"
+                    value="<%=user._id%>"
+                />
+                <input type="hidden" name="postId" value="<%= post._id %>" />
+                <button type="submit">Like</button>
+            </form>
+            <p><%= post.likes.length %></p>
             <br />
             <h3>Comments</h3>
             <% if(comments) { %> <% comments.forEach(function(comment) { %> <%
