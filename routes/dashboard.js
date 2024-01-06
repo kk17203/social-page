@@ -81,6 +81,11 @@ router.post(
             // Add user to likes array
             post.likes.push(currentUser);
             await post.save();
+        } else if (post.likes.includes(currentUser)) {
+            // If user has not already liked post.
+            const userIndex = post.likes.indexOf(currentUser); // Returns the index of current user in likes array
+            post.likes.splice(userIndex, 1); // Removes current user from likes array
+            await post.save();
         }
         res.redirect("/dashboard");
     })
