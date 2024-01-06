@@ -7,7 +7,7 @@
     </head>
     <body>
         <h1><%=user.name%> Dashboard</h1>
-        <a href="/profile">Profile Page</a>
+        <a href="/dashboard">Dashboard</a>
         <a href="/users">Users</a>
         <a href="/logout">LOG OUT</a>
 
@@ -16,9 +16,8 @@
         <% if(posts) { %>
         <!-- Loop through each one  -->
         <% posts.forEach(function(post) { %> <%
-        <!-- checks if post is from the current user or from a user the current one follows  -->
-        if(post.author._id.toString() === user._id.toString() ||
-        user.followed.includes(post.author._id)) { %>
+        <!-- checks if post is from the current user  -->
+        if(post.author._id.toString() === user._id.toString()) { %>
         <div>
             <h3>Post Author: <%= post.author.username %></h3>
             <p><em>(<%=post.timestamp%>)</em></p>
