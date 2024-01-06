@@ -4,11 +4,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
+        <script src="/javascripts/script.js" defer></script>
         <title><%= title %></title>
     </head>
     <body>
         <h1><%=user.name%> Dashboard</h1>
         <div><%- include('header') %></div>
+        <div><%- include('profilePicForm') %></div>
         <h1>Posts</h1>
         <!-- If there are posts  -->
         <% if(posts) { %>
