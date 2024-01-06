@@ -18,6 +18,7 @@ router.get(
             title: "Users Page",
             users: users,
             currentUser: req.user,
+            currentPage: "/users",
         });
     })
 );

@@ -27,6 +27,7 @@ router.get(
             user: req.user,
             posts: posts,
             comments: comments,
+            currentPage: "/dashboard",
         });
     })
 );
