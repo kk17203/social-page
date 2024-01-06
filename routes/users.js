@@ -34,6 +34,11 @@ router.post(
             // Add user to followed array
             currentUser.followed.push(userToFollow);
             await currentUser.save();
+        } else if (currentUser.followed.includes(userToFollow)) {
+            const followedUserIndex =
+                currentUser.followed.indexOf(userToFollow);
+            currentUser.followed.splice(followedUserIndex, 1);
+            await currentUser.save();
         }
         res.redirect("/users");
     })

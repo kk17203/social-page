@@ -15,18 +15,17 @@
             <h3>Username: <%=user.username%></h3>
             <p>First Name: <%=user.first_name%></p>
             <p>Last Name: <%=user.last_name%></p>
-            <% if(!currentUser.followed.includes(user._id)) { %>
             <form action="" method="POST">
                 <input
                     type="hidden"
                     name="userToFollow"
                     value="<%=user._id%>"
                 />
-                <button type="submit">Follow</button>
+                <button type="submit">
+                    <% if(!currentUser.followed.includes(user._id)) { %> Follow
+                    <% } else { %> Unfollow <% } %>
+                </button>
             </form>
-            <% } else { %>
-            <p>Already Following</p>
-            <% } %>
         </div>
         <% } %> <% })} %>
     </body>
