@@ -11,7 +11,13 @@
         <a href="/logout">LOG OUT</a>
 
         <h1>Posts</h1>
-        <% if(posts) { %> <% posts.forEach(function(post) { %>
+        <!-- If there are posts  -->
+        <% if(posts) { %>
+        <!-- Loop through each one  -->
+        <% posts.forEach(function(post) { %> <%
+        <!-- checks if post is from the current user or from a user the current one follows  -->
+        if(post.author._id.toString() === user._id.toString() ||
+        user.followed.includes(post.author._id)) { %>
         <div>
             <h3>Post Author: <%= post.author.username %></h3>
             <p><em>(<%=post.timestamp%>)</em></p>
@@ -28,7 +34,11 @@
             <p><%= post.likes.length %></p>
             <br />
             <h3>Comments</h3>
-            <% if(comments) { %> <% comments.forEach(function(comment) { %> <%
+            <!-- checks if there are comments  -->
+            <% if(comments) { %>
+            <!-- loops through each comment  -->
+            <% comments.forEach(function(comment) { %> <%
+            <!-- makes sure comment is assigned to the correct post  -->
             if(comment.post._id.toString() === post._id.toString()) { %>
             <p>Comment Author: <em>(<%= comment.author.name %>)</em></p>
             <p><%= comment.content %></p>
@@ -45,7 +55,7 @@
                 <button type="submit">Submit Comment</button>
             </form>
         </div>
-        <% }) %> <% } %>
+        <% } %> <% }) %> <% } %>
 
         <h1>New Post</h1>
         <form action="" method="POST">
