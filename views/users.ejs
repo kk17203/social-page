@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="/javascripts/script.js" defer></script>
+
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <title><% title %></title>
     </head>
@@ -13,6 +15,13 @@
         <% if(users) { %> <% users.forEach(function(user) { %> <%
         if(currentUser._id.toString() !== user._id.toString()) { %>
         <div>
+            <a href="/userPage/<%= user._id %>">
+                <img
+                    src="<%= user.profile_picture %>"
+                    alt="Profile Pic"
+                    class="profile-pic"
+                />
+            </a>
             <h3>Username: <%=user.username%></h3>
             <p>First Name: <%=user.first_name%></p>
             <p>Last Name: <%=user.last_name%></p>

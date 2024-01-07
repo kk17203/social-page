@@ -23,3 +23,8 @@ function selectProfilePicture(labelId, imageId) {
         }
     });
 }
+
+// User page submit form
+function submitUserPageForm() {
+    document.getElementById("userPageForm").submit();
+}
