@@ -4,12 +4,22 @@ document.getElementById("openModalBtn").addEventListener("click", function () {
 
 // Close the modal if user clicks outside of it
 window.addEventListener("click", function (event) {
-    if (event.target === this.document.getElementById("myModal")) {
-        this.document.getElementById("myModal").style.display = "none";
+    const myModal = document.getElementById("myModal");
+
+    if (event.target === myModal) {
+        myModal.style.display = "none";
     }
 });
 
-function selectProfilePicture(imageId) {
-    console.log(imageId);
-    document.getElementById(imageId).checked = true;
+function selectProfilePicture(labelId, imageId) {
+    const element = document.getElementById(labelId);
+    element.checked = true;
+    const image = document.getElementById(imageId);
+    image.classList.add("selected-profile-pic");
+    window.addEventListener("click", function (event) {
+        if (event.target !== element && event.target !== image) {
+            element.checked = false;
+            image.classList.remove("selected-profile-pic");
+        }
+    });
 }
