@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 
 /* GET home page. */
 router.get("/", (req, res, next) => {
@@ -10,5 +11,15 @@ router.get("/", (req, res, next) => {
 
     res.render("index", { title: "Index" });
 });
+
+// POST for log-in form
+router.post(
+    "/",
+    passport.authenticate("local", {
+        successRedirect: "/dashboard",
+        failureRedirect: "/",
+        failureFlash: true,
+    })
+);
 
 module.exports = router;

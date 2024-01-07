@@ -1,12 +1,27 @@
 <link rel="stylesheet" href="/stylesheets/header.css" />
 
-<a href="/dashboard" class="<%= currentPage === '/dashboard' ? 'active' : '' %>"
-    >Dashboard</a
->
-<a href="/profile" class="<%= currentPage === '/profile' ? 'active' : '' %>"
-    >Profile Page</a
->
-<a href="/users" class="<%= currentPage === '/users' ? 'active' : '' %>"
-    >Users</a
->
-<a href="/logout">LOG OUT</a>
+<div class="global-header">
+    <div class="nav-bar">
+        <img class="logo" src="/images/POCO_With.png" alt="logo" />
+        <div class="global-nav">
+            <a
+                href="/dashboard"
+                class="<%= currentPage === '/dashboard' ? 'active' : '' %>"
+                >Dashboard</a
+            >
+            <a
+                href="/profile"
+                class="<%= currentPage === '/profile' ? 'active' : '' %>"
+                >Profile Page</a
+            >
+            <a
+                href="/users"
+                class="<%= currentPage === '/users' ? 'active' : '' %>"
+                >Users</a
+            >
+        </div>
+        <div class="user-nav">
+            <a href="/logout">LOG OUT</a>
+        </div>
+    </div>
+</div>

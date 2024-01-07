@@ -14,7 +14,6 @@ require("./routes/passport-config")(passport); //Link to passport config file
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const loginRouter = require("./routes/login");
 const signupRouter = require("./routes/signup");
 const logoutRouter = require("./routes/logout");
 const dashboardRouter = require("./routes/dashboard");
@@ -61,7 +60,6 @@ app.use((req, res, next) => {
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/logout", logoutRouter);
 app.use("/dashboard", dashboardRouter);

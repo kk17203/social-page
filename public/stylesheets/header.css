@@ -1,7 +1,55 @@
-a {
-    color: #00b7ff;
+.global-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #f0f0f5;
+    background-color: #f0f0f5;
+    height: 100px;
+    line-height: 18px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
 }
 
-.active {
+.nav-bar {
+    display: flex;
+    height: 100px;
+    margin: 0 21px;
+    padding: 0 16px;
+    max-width: 1250px;
+    width: 100%;
+    /* position: relative; */
+}
+
+.logo {
+    height: 100px;
+}
+
+.global-nav {
+    display: flex;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0 20px;
+    height: 100px;
+    align-items: center;
+}
+
+.global-nav a {
+    font-size: 1.2rem;
+    margin: 0 20px;
+    color: #00b7ff;
+    text-decoration: none;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.global-nav .active {
     color: green;
+    border-bottom: 2px solid green;
+}
+
+.user-nav {
 }
