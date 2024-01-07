@@ -36,11 +36,9 @@ router.get(
 router.post(
     "/",
     asyncHandler(async (req, res, next) => {
-        const post = req.body.post;
-
         const newPost = new Post({
             author: req.user._id,
-            post,
+            post: req.body.post,
         });
 
         // Save the new Post to DB
