@@ -3,6 +3,7 @@ const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const Post = require("../models/posts");
 const Comment = require("../models/comments");
+const User = require("../models/users");
 
 /* GET home page. */
 router.get(
@@ -29,6 +30,24 @@ router.get(
             comments: comments,
             currentPage: "/profile",
         });
+    })
+);
+
+// POST for Profile Picture selection
+router.post(
+    "/selectPic",
+    asyncHandler(async (req, res, next) => {
+        const userId = req.user._id;
+        const selectedPic = req.body.profilePicture;
+
+        console.log(req.body);
+        console.log(userId);
+        console.log(selectedPic);
+
+        await User.findByIdAndUpdate(userId, {
+            profile_picture: selectedPic,
+        });
+        res.redirect("/profile");
     })
 );
 

@@ -7,6 +7,10 @@ const UserSchema = new Schema({
     email: { type: String, required: true },
     first_name: { type: String, required: true },
     last_name: { type: String, required: true },
+    profile_picture: {
+        type: String,
+        default: "/images/cartoon-rocket-ai-crop.jpg",
+    },
     followed: [{ type: Schema.Types.ObjectId, ref: "Users" }], // Array of ref to other users they follow
 });
 

@@ -10,6 +10,13 @@
     <body>
         <h1><%=user.name%> Dashboard</h1>
         <div><%- include('header') %></div>
+        <% if(user.profile_picture) { %>
+        <img
+            src="<%= user.profile_picture %>"
+            alt="Profile Picture"
+            class="profile-pic"
+        />
+        <% } %>
         <div><%- include('profilePicForm') %></div>
         <h1>Posts</h1>
         <!-- If there are posts  -->
