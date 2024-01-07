@@ -5,15 +5,15 @@ body {
     flex-direction: column;
 }
 
-a {
+/* a {
     color: #00b7ff;
 }
 
 .active {
     color: green;
-}
+} */
 
-/* Profile picture pop up  */
+/* Profile picture pop up 
 #myModal {
     display: none;
     position: fixed;
@@ -29,12 +29,12 @@ a {
     margin: 15% auto;
     padding: 20px;
     width: 50%;
-}
+} */
 
 .profile-pic {
     width: 100px;
 }
 
-.selected-profile-pic {
+/* .selected-profile-pic {
     width: 120px;
-}
+} */
