@@ -43,17 +43,14 @@
             </form>
             <p><%= post.likes.length %></p>
             <br />
-            <h3>Comments</h3>
-            <!-- checks if there are comments  -->
-            <% if(comments) { %>
-            <!-- loops through each comment  -->
-            <% comments.forEach(function(comment) { %> <%
-            <!-- makes sure comment is assigned to the correct post  -->
-            if(comment.post._id.toString() === post._id.toString()) { %>
+            <% if(post.comments) { %>
+            <h3><%= post.comments.length %> Comments</h3>
+            <% post.comments.forEach(function(comment) { %>
             <p>Comment Author: <em>(<%= comment.author.name %>)</em></p>
             <p><%= comment.content %></p>
-            <% } %> <% })} %>
-            <form action="/dashboard/comments" method="POST">
+            <% })} %>
+
+            <form action="/profile/comments" method="POST">
                 <label for="content">New Comment</label>
                 <textarea
                     name="content"

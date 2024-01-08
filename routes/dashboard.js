@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const Post = require("../models/posts");
-const Comment = require("../models/comments");
 
 /* GET home page. */
 router.get(
@@ -14,19 +13,14 @@ router.get(
         }
 
         const posts = await Post.find({})
+            .populate("comments.author")
             .sort({ timestamp: -1 })
             .populate("author"); // Find all Posts and Populate the 'author' field in the 'posts' array
-
-        const comments = await Comment.find({})
-            .sort({ createdAt: -1 })
-            .populate("post")
-            .populate("author"); // Populate the 'post' and 'author' fields in the 'comments' array
 
         res.render("dashboard", {
             title: "Dashboard",
             user: req.user,
             posts: posts,
-            comments: comments,
             currentPage: "/dashboard",
         });
     })
@@ -54,14 +48,25 @@ router.post(
         const content = req.body.content;
         const postId = req.body.postId;
 
-        const newComment = new Comment({
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            // Handle the case where the post is not found
+            return res.status(404).json({ error: "Post not found" });
+        }
+
+        // Create a new comment
+        const newComment = {
             author: req.user._id,
-            post: postId,
             content: content,
-        });
+        };
+
+        // Add the new comment to the post's comments array
+        post.comments.push(newComment);
 
         // Save the new Comment to DB
-        await newComment.save();
+        await post.save();
+        console.log(`THIS ${req.originalUrl}`);
         res.redirect("/dashboard");
     })
 );
