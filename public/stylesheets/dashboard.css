@@ -85,6 +85,14 @@
     width: 100%;
 }
 
+.author-name {
+    font-weight: 600;
+}
+
+.date-time {
+    color: rgb(155, 153, 153);
+}
+
 .comment-text {
     width: 100%;
 }

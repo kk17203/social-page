@@ -90,8 +90,12 @@
                             </div>
                             <div class="comments-content">
                                 <div class="comment-name-time">
-                                    <p><%= comment.author.name %></p>
-                                    <p><%= comment.formattedCreatedAt %></p>
+                                    <p class="author-name">
+                                        <%= comment.author.name %>
+                                    </p>
+                                    <p class="date-time">
+                                        <%= comment.formattedCreatedAt %>
+                                    </p>
                                 </div>
                                 <div class="comment-text">
                                     <p><%= comment.content %></p>
