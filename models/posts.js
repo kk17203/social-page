@@ -1,3 +1,4 @@
+const moment = require("moment");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -8,6 +9,11 @@ const CommentSchema = new Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
+// Virtual field for formatted createdAt
+CommentSchema.virtual("formattedCreatedAt").get(function () {
+    return moment(this.createdAt).fromNow();
+});
+
 const PostSchema = new Schema({
     author: { type: Schema.Types.ObjectId, ref: "User" },
     post: { type: String, required: true },
@@ -16,7 +22,7 @@ const PostSchema = new Schema({
     timestamp: { type: Date, default: Date.now },
 });
 
-// Define a virtual field for formatted timestamp
+// Virtual field for formatted timestamp
 PostSchema.virtual("formattedTimestamp").get(function () {
     // Format the date using Intl.DateTimeFormat
     const formattedDate = new Intl.DateTimeFormat("en-US", {

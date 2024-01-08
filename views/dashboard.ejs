@@ -5,6 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+        <script
+            src="https://kit.fontawesome.com/008151671d.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="/javascripts/script.js"></script>
         <title><%= title %></title>
     </head>
     <body>
@@ -14,7 +19,7 @@
             <!-- If there are posts  -->
             <% if(posts) { %>
             <!-- Loop through each one  -->
-            <% posts.forEach(function(post) { %> <%
+            <% posts.forEach(function(post, index) { %> <%
             <!-- checks if post is from the current user or from a user the current one follows  -->
             if(post.author._id.toString() === user._id.toString() ||
             user.followed.includes(post.author._id)) { %>
@@ -33,27 +38,68 @@
                     <p><%= post.post %></p>
                 </div>
                 <div class="post-footer">
-                    <form action="/dashboard/likes" method="POST">
-                        <input
-                            type="hidden"
-                            name="userWhoLikes"
-                            value="<%=user._id%>"
-                        />
-                        <input
-                            type="hidden"
-                            name="postId"
-                            value="<%= post._id %>"
-                        />
-                        <button type="submit">Like</button>
-                    </form>
-                    <p><%= post.likes.length %></p>
-                    <br />
-                    <% if(post.comments) { %>
-                    <h3><%= post.comments.length %> Comments</h3>
-                    <% post.comments.forEach(function(comment) { %>
-                    <p>Comment Author: <em>(<%= comment.author.name %>)</em></p>
-                    <p><%= comment.content %></p>
-                    <% })} %>
+                    <div class="likes-comments-counter">
+                        <p>
+                            <%= post.likes.length %> likes -
+                            <%=post.comments.length %> comments
+                        </p>
+                        <div class="post-footer-icons">
+                            <form
+                                action="/dashboard/likes"
+                                method="POST"
+                                id="likeForm<%= index %>"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="userWhoLikes"
+                                    value="<%=user._id%>"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="postId"
+                                    value="<%= post._id %>"
+                                />
+                                <% if(!post.likes.includes(user._id)) { %>
+                                <i
+                                    class="fa-regular fa-thumbs-up"
+                                    style="cursor: pointer"
+                                    onclick="submitLikeForm('<%=index%>')"
+                                ></i>
+                                <% } else { %>
+
+                                <i
+                                    class="fa-solid fa-thumbs-up"
+                                    style="cursor: pointer"
+                                    onclick="submitLikeForm('<%=index%>')"
+                                ></i>
+                                <% } %>
+                            </form>
+                            <i class="fa-regular fa-comment"></i>
+                            <!-- <i class="fa-solid fa-comment"></i> -->
+                        </div>
+                    </div>
+                    <div class="comments">
+                        <% if(post.comments) { %> <%
+                        post.comments.forEach(function(comment) { %>
+                        <div class="comments-comment">
+                            <div class="comments-image">
+                                <img
+                                    src="<%=comment.author.profile_picture%>"
+                                    alt="profile pic"
+                                />
+                            </div>
+                            <div class="comments-content">
+                                <div class="comment-name-time">
+                                    <p><%= comment.author.name %></p>
+                                    <p><%= comment.formattedCreatedAt %></p>
+                                </div>
+                                <div class="comment-text">
+                                    <p><%= comment.content %></p>
+                                </div>
+                            </div>
+                        </div>
+                        <% })} %>
+                    </div>
                     <form action="/dashboard/comments" method="POST">
                         <label for="content">New Comment</label>
                         <textarea

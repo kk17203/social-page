@@ -1,3 +1,5 @@
+@import url("/node_modules/font-awesome/css/font-awesome.min.css");
+
 .post-container {
     background-color: #fff;
     border-radius: 4px;
@@ -10,7 +12,7 @@
 .post-header {
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 10px;
 }
 
 .post-header img {
@@ -21,4 +23,68 @@
 
 .post-header p {
     margin: 0 20px;
+}
+
+.post-body {
+    border-top: 1px solid #ccc;
+    padding: 10px;
+}
+
+.post-footer {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.likes-comments-counter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post-footer-icons {
+    display: flex;
+}
+
+.post-footer-icons i {
+    font-size: 20px;
+    margin: 0 5px;
+    color: green;
+}
+
+.comments {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+}
+
+.comments-comment {
+    display: flex;
+    /* width: 80%; */
+    margin: 10px 10px 10px 40px;
+}
+
+.comments-comment img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.comments-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.comments-content p {
+    margin: 5px;
+}
+
+.comment-name-time {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.comment-text {
+    width: 100%;
 }
