@@ -11,6 +11,7 @@ const UserSchema = new Schema({
         type: String,
         default: "/images/cartoon-rocket-ai-crop.jpg",
     },
+    followers: [{ type: Schema.Types.ObjectId, ref: "Users" }],
     followed: [{ type: Schema.Types.ObjectId, ref: "Users" }], // Array of ref to other users they follow
 });
 

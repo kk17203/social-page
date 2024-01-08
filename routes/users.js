@@ -18,6 +18,7 @@ router.get(
             title: "Users Page",
             users: users,
             currentUser: req.user,
+            user: req.user,
             currentPage: "/users",
         });
     })
@@ -27,19 +28,35 @@ router.get(
 router.post(
     "/",
     asyncHandler(async (req, res, next) => {
-        const currentUser = req.user;
-        const userToFollow = req.body.userToFollow;
+        const currentUser = req.user; // returns whole user
+        const currentUserId = req.user._id;
+        const userToFollowId = req.body.userToFollow; // returns id
+        const userToFollow = await User.findById(userToFollowId); // Find User with id of userToFollowId
+
+        console.log(currentUser);
+        console.log(`currentUserId ${currentUserId}`);
+        console.log(`userToFollowId ${userToFollowId}`);
+        console.log(`User to Follow ${userToFollow}`);
 
         // Check if already followed in array
-        if (!currentUser.followed.includes(userToFollow)) {
-            // Add user to followed array
-            currentUser.followed.push(userToFollow);
-            await currentUser.save();
-        } else if (currentUser.followed.includes(userToFollow)) {
+        if (!currentUser.followed.includes(userToFollowId)) {
+            // Add user that we want to follow into current users followed array
+            currentUser.followed.push(userToFollowId);
+            // Add current user into other users followers array
+            userToFollow.followers.push(currentUserId);
+            await Promise.all([currentUser.save(), userToFollow.save()]);
+        } else if (currentUser.followed.includes(userToFollowId)) {
+            // Find index of followed user in current users followers array
             const followedUserIndex =
-                currentUser.followed.indexOf(userToFollow);
+                currentUser.followed.indexOf(userToFollowId);
+            // Delete followed user from current users array
             currentUser.followed.splice(followedUserIndex, 1);
-            await currentUser.save();
+            // Find index of current user in followed users followers array
+            const currentUserIndex =
+                userToFollow.followers.indexOf(currentUserId);
+            // Delete current user from followed users followers array
+            userToFollow.followers.splice(currentUserIndex, 1);
+            await Promise.all([currentUser.save(), userToFollow.save()]);
         }
         res.redirect("/users");
     })
