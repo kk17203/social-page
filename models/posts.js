@@ -10,5 +10,20 @@ const PostSchema = new Schema({
     timestamp: { type: Date, default: Date.now },
 });
 
+// Define a virtual field for formatted timestamp
+PostSchema.virtual("formattedTimestamp").get(function () {
+    // Format the date using Intl.DateTimeFormat
+    const formattedDate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+    }).format(this.timestamp);
+
+    return formattedDate;
+});
+
 // Export model
 module.exports = mongoose.model("Post", PostSchema);

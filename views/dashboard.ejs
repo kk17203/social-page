@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/dashboard.css" />
         <title><%= title %></title>
     </head>
     <body>
@@ -17,50 +18,62 @@
             <!-- checks if post is from the current user or from a user the current one follows  -->
             if(post.author._id.toString() === user._id.toString() ||
             user.followed.includes(post.author._id)) { %>
-            <div>
-                <h3>Post Author: <%= post.author.username %></h3>
-                <p><em>(<%=post.timestamp%>)</em></p>
-                <p><%= post.post %></p>
-                <form action="/dashboard/likes" method="POST">
-                    <input
-                        type="hidden"
-                        name="userWhoLikes"
-                        value="<%=user._id%>"
+            <div class="post-container">
+                <div class="post-header">
+                    <img
+                        src="<%= post.author.profile_picture %>"
+                        alt="profile pic"
                     />
-                    <input
-                        type="hidden"
-                        name="postId"
-                        value="<%= post._id %>"
-                    />
-                    <button type="submit">Like</button>
-                </form>
-                <p><%= post.likes.length %></p>
-                <br />
-                <h3>Comments</h3>
-                <!-- checks if there are comments  -->
-                <% if(comments) { %>
-                <!-- loops through each comment  -->
-                <% comments.forEach(function(comment) { %> <%
-                <!-- makes sure comment is assigned to the correct post  -->
-                if(comment.post._id.toString() === post._id.toString()) { %>
-                <p>Comment Author: <em>(<%= comment.author.name %>)</em></p>
-                <p><%= comment.content %></p>
-                <% } %> <% })} %>
-                <form action="/dashboard/comments" method="POST">
-                    <label for="content">New Comment</label>
-                    <textarea
-                        name="content"
-                        id="content"
-                        cols="30"
-                        rows="10"
-                    ></textarea>
-                    <input
-                        type="hidden"
-                        name="postId"
-                        value="<%= post._id %>"
-                    />
-                    <button type="submit">Submit Comment</button>
-                </form>
+                    <div class="post-header-info">
+                        <p><%= post.author.name %></p>
+                        <p><em>(<%=post.formattedTimestamp%>)</em></p>
+                    </div>
+                </div>
+                <div class="post-body">
+                    <p><%= post.post %></p>
+                </div>
+                <div class="post-footer">
+                    <form action="/dashboard/likes" method="POST">
+                        <input
+                            type="hidden"
+                            name="userWhoLikes"
+                            value="<%=user._id%>"
+                        />
+                        <input
+                            type="hidden"
+                            name="postId"
+                            value="<%= post._id %>"
+                        />
+                        <button type="submit">Like</button>
+                    </form>
+                    <p><%= post.likes.length %></p>
+                    <br />
+                    <h3>Comments</h3>
+                    <!-- checks if there are comments  -->
+                    <% if(comments) { %>
+                    <!-- loops through each comment  -->
+                    <% comments.forEach(function(comment) { %> <%
+                    <!-- makes sure comment is assigned to the correct post  -->
+                    if(comment.post._id.toString() === post._id.toString()) { %>
+                    <p>Comment Author: <em>(<%= comment.author.name %>)</em></p>
+                    <p><%= comment.content %></p>
+                    <% } %> <% })} %>
+                    <form action="/dashboard/comments" method="POST">
+                        <label for="content">New Comment</label>
+                        <textarea
+                            name="content"
+                            id="content"
+                            cols="30"
+                            rows="10"
+                        ></textarea>
+                        <input
+                            type="hidden"
+                            name="postId"
+                            value="<%= post._id %>"
+                        />
+                        <button type="submit">Submit Comment</button>
+                    </form>
+                </div>
             </div>
             <% } %> <% }) %> <% } %>
 
