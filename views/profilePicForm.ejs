@@ -1,11 +1,17 @@
 <link rel="stylesheet" href="/stylesheets/popup.css" />
 <script src="/javascripts/popup.js" defer></script>
 
-<button id="openModalBtn">Choose Profile Picture</button>
+<button id="openModalBtn" class="open-modal-button">
+    Choose Profile Picture
+</button>
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <form action="/profile/selectPic" method="POST">
+        <form
+            action="/profile/selectPic"
+            method="POST"
+            class="profile-pic-form"
+        >
             <label for="profilePic1">
                 <input
                     type="radio"

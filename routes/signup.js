@@ -16,7 +16,7 @@ router.post(
         const action = req.body.action;
 
         if (action === "signup") {
-            const { username, password, email, first_name, last_name } =
+            const { username, password, email, phone, first_name, last_name } =
                 req.body;
 
             // Hash and Salt password before save
@@ -28,6 +28,7 @@ router.post(
                 username,
                 password: hashedPassword, // Save the hash password
                 email,
+                phone,
                 first_name,
                 last_name,
             });

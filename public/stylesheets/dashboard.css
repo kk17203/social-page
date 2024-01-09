@@ -217,3 +217,90 @@
 .post-form button:active {
     box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
 }
+
+/* PROFILE */
+
+.profile-sidebar {
+    width: 250px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(13, 13, 18, 0.04);
+    padding: 16px;
+    margin: 10px;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-pic {
+    width: 150px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.open-modal-button {
+    background-color: #cccccc23;
+    border-radius: 5px;
+    border: 1px solid lightgreen;
+    color: green;
+    cursor: pointer;
+}
+
+.profile-name {
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin: 5px 0;
+}
+
+.followers-following {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.followers,
+.following {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.follow-label {
+    color: rgb(87, 86, 86);
+}
+
+.follow-number {
+    font-weight: 550;
+    font-size: 1.2rem;
+}
+
+.followers p,
+.following p {
+    margin: 0;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.profile-info p {
+    margin: 0;
+}
+
+.profile-label {
+    font-size: 1rem;
+}
+
+.profile-label-lite {
+    color: rgba(87, 86, 86, 0.751);
+    font-size: 0.9rem;
+}
