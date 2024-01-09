@@ -96,3 +96,18 @@
 .comment-text {
     width: 100%;
 }
+
+.comments-form {
+    margin: 10px -10px 10px 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    /* display: none; */
+}
+
+.opened-popup {
+    display: block;
+}
+
+.comment-form-input {
+    resize: none;
+}

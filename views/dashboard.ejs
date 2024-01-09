@@ -9,13 +9,12 @@
             src="https://kit.fontawesome.com/008151671d.js"
             crossorigin="anonymous"
         ></script>
-        <script src="/javascripts/script.js"></script>
+        <script src="/javascripts/script.js" defer></script>
         <title><%= title %></title>
     </head>
     <body>
         <div><%- include('header') %></div>
         <div class="main">
-            <h1>Posts</h1>
             <!-- If there are posts  -->
             <% if(posts) { %>
             <!-- Loop through each one  -->
@@ -74,7 +73,12 @@
                                 ></i>
                                 <% } %>
                             </form>
-                            <i class="fa-regular fa-comment"></i>
+                            <i
+                                id="openCommentsForm"
+                                class="fa-regular fa-comment"
+                                style="cursor: pointer"
+                                onclick="openCommentsForm('<%= index %>')"
+                            ></i>
                             <!-- <i class="fa-solid fa-comment"></i> -->
                         </div>
                     </div>
@@ -104,22 +108,34 @@
                         </div>
                         <% })} %>
                     </div>
-                    <form action="/dashboard/comments" method="POST">
-                        <label for="content">New Comment</label>
-                        <textarea
-                            name="content"
-                            placeholder="Add a comment"
-                            id="content"
-                            cols="30"
-                            rows="10"
-                        ></textarea>
-                        <input
-                            type="hidden"
-                            name="postId"
-                            value="<%= post._id %>"
-                        />
-                        <button type="submit">Submit Comment</button>
-                    </form>
+                    <div
+                        class="comments-form"
+                        id="comments-form<%=index%>"
+                        style="display: none"
+                    >
+                        <%= %>
+                        <form
+                            action="/dashboard/comments"
+                            method="POST"
+                            id="commentForm<%= index %>"
+                        >
+                            <label for="content"></label>
+                            <textarea
+                                name="content"
+                                placeholder="Add a comment"
+                                id="content"
+                                class="comment-form-input"
+                                cols="30"
+                                rows="2"
+                            ></textarea>
+                            <input
+                                type="hidden"
+                                name="postId"
+                                value="<%= post._id %>"
+                            />
+                            <button type="submit">Submit Comment</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <% } %> <% }) %> <% } %>
