@@ -137,11 +137,16 @@
 .comments-form button {
     padding: 10px;
     background-color: #cccccc23;
-    color: lightgray;
     border-radius: 10px;
     border: none;
+    color: green;
+    cursor: pointer;
 }
 
-.comments-form-button-active {
-    color: green;
+.comments-form button:hover {
+    background-color: #cccccc4f;
+}
+
+.comments-form button:active {
+    box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
 }

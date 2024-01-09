@@ -116,7 +116,7 @@
                     <div
                         class="comments-form-container"
                         id="commentsFormContainer<%=index%>"
-                        style="display: block"
+                        style="display: none"
                     >
                         <div class="comments-form">
                             <div class="new-comments-image">
@@ -139,13 +139,16 @@
                                         class="comment-form-input"
                                         cols="30"
                                         rows="3"
+                                        required
                                     ></textarea>
                                     <input
                                         type="hidden"
                                         name="postId"
                                         value="<%= post._id %>"
                                     />
-                                    <button type="submit">Post</button>
+                                    <button type="submit" id="postButton">
+                                        Post
+                                    </button>
                                 </div>
                             </form>
                         </div>
