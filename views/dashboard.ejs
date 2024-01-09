@@ -74,12 +74,17 @@
                                 <% } %>
                             </form>
                             <i
-                                id="openCommentsForm<$=index%>"
+                                id="iconReg<%= index %>"
                                 class="fa-regular fa-comment"
-                                style="cursor: pointer"
+                                style="display: block; cursor: pointer"
                                 onclick="openCommentsForm('<%= index %>')"
                             ></i>
-                            <!-- <i class="fa-solid fa-comment"></i> -->
+                            <i
+                                class="fa-solid fa-comment"
+                                id="iconSolid<%=index%>"
+                                style="display: none; cursor: pointer"
+                                onclick="openCommentsForm('<%= index %>')"
+                            ></i>
                         </div>
                     </div>
                     <div class="comments">
@@ -109,32 +114,41 @@
                         <% })} %>
                     </div>
                     <div
-                        class="comments-form"
-                        id="comments-form<%=index%>"
-                        style="display: none"
+                        class="comments-form-container"
+                        id="commentsFormContainer<%=index%>"
+                        style="display: block"
                     >
-                        <%= %>
-                        <form
-                            action="/dashboard/comments"
-                            method="POST"
-                            id="commentForm<%= index %>"
-                        >
-                            <label for="content"></label>
-                            <textarea
-                                name="content"
-                                placeholder="Add a comment"
-                                id="commentContent<%=index%>"
-                                class="comment-form-input"
-                                cols="30"
-                                rows="2"
-                            ></textarea>
-                            <input
-                                type="hidden"
-                                name="postId"
-                                value="<%= post._id %>"
-                            />
-                            <button type="submit">Submit Comment</button>
-                        </form>
+                        <div class="comments-form">
+                            <div class="new-comments-image">
+                                <img
+                                    src="<%= user.profile_picture %>"
+                                    alt="Profile Pic"
+                                />
+                            </div>
+                            <form
+                                action="/dashboard/comments"
+                                method="POST"
+                                id="commentForm<%= index %>"
+                            >
+                                <label for="commentContent<%=index%>"></label>
+                                <div class="comments-form-text-button">
+                                    <textarea
+                                        name="content"
+                                        placeholder="Add a comment"
+                                        id="commentContent<%=index%>"
+                                        class="comment-form-input"
+                                        cols="30"
+                                        rows="3"
+                                    ></textarea>
+                                    <input
+                                        type="hidden"
+                                        name="postId"
+                                        value="<%= post._id %>"
+                                    />
+                                    <button type="submit">Post</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

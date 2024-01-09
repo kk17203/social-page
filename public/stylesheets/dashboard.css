@@ -1,4 +1,4 @@
-@import url("/node_modules/font-awesome/css/font-awesome.min.css");
+/* @import url("/node_modules/font-awesome/css/font-awesome.min.css"); */
 
 .post-container {
     background-color: #fff;
@@ -98,16 +98,50 @@
 }
 
 .comments-form {
-    margin: 10px -10px 10px 40px;
+    margin: 10px -10px 10px 60px;
     padding-top: 20px;
     border-top: 1px solid #ccc;
-    /* display: none; */
+    display: flex;
 }
 
-.opened-popup {
-    display: block;
+.comments-form img {
+    width: 30px;
+    /* height: 30px; */
+    border-radius: 5px;
+    margin-right: 20px;
 }
 
-.comment-form-input {
+.comments-form form {
+    width: 100%;
+    margin-right: 20px;
+}
+
+.comments-form-text-button {
+    width: 100%;
+    display: flex;
+}
+.comments-form textarea {
     resize: none;
+    width: 100%;
+    margin-right: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgba(211, 211, 211, 0.37);
+}
+
+.comments-form textarea:focus {
+    outline: none;
+}
+
+.comments-form button {
+    padding: 10px;
+    background-color: #cccccc23;
+    color: lightgray;
+    border-radius: 10px;
+    border: none;
+}
+
+.comments-form-button-active {
+    color: green;
 }
