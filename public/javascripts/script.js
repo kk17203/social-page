@@ -6,8 +6,14 @@ function submitLikeForm(index) {
 
 function openCommentsForm(index) {
     const commentsForm = document.getElementById(`comments-form${index}`);
-    commentsForm.style.display =
-        commentsForm.style.display === "none" ? "block" : "none";
-}
 
-// PROBLEM IS HERE
+    const currentDisplay = commentsForm.style.display;
+    commentsForm.style.display = currentDisplay === "none" ? "block" : "none";
+
+    if (commentsForm.style.display === "block") {
+        const textarea = document.getElementById(`commentContent${index}`);
+        if (textarea) {
+            textarea.focus();
+        }
+    }
+}

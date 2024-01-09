@@ -74,7 +74,7 @@
                                 <% } %>
                             </form>
                             <i
-                                id="openCommentsForm"
+                                id="openCommentsForm<$=index%>"
                                 class="fa-regular fa-comment"
                                 style="cursor: pointer"
                                 onclick="openCommentsForm('<%= index %>')"
@@ -123,7 +123,7 @@
                             <textarea
                                 name="content"
                                 placeholder="Add a comment"
-                                id="content"
+                                id="commentContent<%=index%>"
                                 class="comment-form-input"
                                 cols="30"
                                 rows="2"
