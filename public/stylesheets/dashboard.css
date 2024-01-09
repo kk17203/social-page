@@ -150,3 +150,64 @@
 .comments-form button:active {
     box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
 }
+
+.new-post-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.new-post-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.post-form {
+    margin: 10px -10px 10px 60px;
+    /* padding-top: 20px; */
+    display: flex;
+    width: 100%;
+}
+
+.post-form form {
+    width: 100%;
+    margin-right: 20px;
+    display: flex;
+}
+
+.post-form-text-button {
+    width: 100%;
+    display: flex;
+}
+.post-form textarea {
+    resize: none;
+    width: 100%;
+    margin-right: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgba(211, 211, 211, 0.37);
+}
+
+.post-form textarea:focus {
+    outline: none;
+}
+
+.post-form button {
+    padding: 10px;
+    background-color: #cccccc23;
+    border-radius: 10px;
+    border: none;
+    color: green;
+    cursor: pointer;
+}
+
+.post-form button:hover {
+    background-color: #cccccc4f;
+}
+
+.post-form button:active {
+    box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
+}
