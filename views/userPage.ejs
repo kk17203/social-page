@@ -23,7 +23,6 @@
                         src="<%= user.profile_picture %>"
                         alt=""
                     />
-                    <div><%- include('profilePicForm') %></div>
                     <p class="profile-name"><%=user.name%></p>
                     <div class="followers-following">
                         <div class="followers">
@@ -56,28 +55,6 @@
                 </div>
             </div>
             <div class="all-posts">
-                <div class="post-container">
-                    <div class="new-post-header">
-                        <img
-                            src="<%= user.profile_picture%>"
-                            alt="Profile Pic"
-                        />
-                        <div class="post-form">
-                            <form action="" method="POST">
-                                <label for="post"></label>
-                                <textarea
-                                    name="post"
-                                    id="post"
-                                    cols="30"
-                                    rows="3"
-                                    placeholder="Write a new post"
-                                    required
-                                ></textarea>
-                                <button type="submit">Post</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 <!-- If there are posts  -->
                 <% if(posts) { %>
                 <!-- Loop through each one  -->
@@ -106,7 +83,7 @@
                             </p>
                             <div class="post-footer-icons">
                                 <form
-                                    action="/dashboard/likes"
+                                    action="/userPage/likes"
                                     method="POST"
                                     id="likeForm<%= index %>"
                                 >
@@ -117,10 +94,17 @@
                                     />
                                     <input
                                         type="hidden"
+                                        name="userToFollow"
+                                        value="<%=user._id%>"
+                                    />
+
+                                    <input
+                                        type="hidden"
                                         name="postId"
                                         value="<%= post._id %>"
                                     />
-                                    <% if(!post.likes.includes(user._id)) { %>
+                                    <% if(!post.likes.includes(currentUser._id))
+                                    { %>
                                     <i
                                         class="fa-regular fa-thumbs-up"
                                         style="cursor: pointer"
@@ -135,6 +119,7 @@
                                     ></i>
                                     <% } %>
                                 </form>
+
                                 <i
                                     id="iconReg<%= index %>"
                                     class="fa-regular fa-comment"
@@ -190,10 +175,15 @@
                                     />
                                 </div>
                                 <form
-                                    action="/dashboard/comments"
+                                    action="/userPage/comments"
                                     method="POST"
                                     id="commentForm<%= index %>"
                                 >
+                                    <input
+                                        type="hidden"
+                                        name="userToFollow"
+                                        value="<%=user._id%>"
+                                    />
                                     <label
                                         for="commentContent<%=index%>"
                                     ></label>

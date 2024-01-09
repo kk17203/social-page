@@ -23,6 +23,7 @@ router.get(
         res.render("userPage", {
             title: "User Page",
             user: user,
+            currentUser: req.user,
             posts: posts,
             currentPage: "",
         });
