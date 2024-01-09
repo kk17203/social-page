@@ -5,6 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+        <script
+            src="https://kit.fontawesome.com/008151671d.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="/javascripts/script.js" defer></script>
+
         <title><%= title %></title>
     </head>
     <body>
@@ -57,7 +63,7 @@
                             alt="Profile Pic"
                         />
                         <div class="post-form">
-                            <form action="" method="POST">
+                            <form action="/profile/posts" method="POST">
                                 <label for="post"></label>
                                 <textarea
                                     name="post"
@@ -93,8 +99,6 @@
                     </div>
                     <div class="post-body">
                         <p><%= post.post %></p>
-                    </div>
-                    <div class="post-footer">
                         <div class="likes-comments-counter">
                             <p>
                                 <%= post.likes.length %> likes -
@@ -102,7 +106,7 @@
                             </p>
                             <div class="post-footer-icons">
                                 <form
-                                    action="/dashboard/likes"
+                                    action="/profile/likes"
                                     method="POST"
                                     id="likeForm<%= index %>"
                                 >
@@ -145,6 +149,8 @@
                                 ></i>
                             </div>
                         </div>
+                    </div>
+                    <div class="post-footer">
                         <div class="comments">
                             <% if(post.comments) { %> <%
                             post.comments.forEach(function(comment) { %>
@@ -184,7 +190,7 @@
                                     />
                                 </div>
                                 <form
-                                    action="/dashboard/comments"
+                                    action="/profile/comments"
                                     method="POST"
                                     id="commentForm<%= index %>"
                                 >

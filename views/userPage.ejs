@@ -4,90 +4,225 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+        <script
+            src="https://kit.fontawesome.com/008151671d.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="/javascripts/script.js" defer></script>
+
         <title><%= title %></title>
     </head>
     <body>
-        <h1><%= user.name %></h1>
         <div><%- include('header') %></div>
-        <% if(user.profile_picture) { %>
-        <img
-            src="<%= user.profile_picture %>"
-            alt="Profile Picture"
-            class="profile-pic"
-        />
-        <% } %>
-        <h3>User Info</h3>
-        <p>Username: <%=user.username%></p>
-        <p>Email: <%=user.email%></p>
-        <p>Name: <%=user.name%></p>
-        <form action="/userPage/followUser" method="POST">
-            <input type="hidden" name="userToFollow" value="<%=user._id%>" />
-            <button type="submit">
-                <% if(!currentUser.followed.includes(user._id)) { %> Follow <% }
-                else { %> Unfollow <% } %>
-            </button>
-        </form>
+        <div class="main">
+            <div class="sidebar">
+                <div class="profile-sidebar">
+                    <img
+                        class="sidebar-pic"
+                        src="<%= user.profile_picture %>"
+                        alt=""
+                    />
+                    <div><%- include('profilePicForm') %></div>
+                    <p class="profile-name"><%=user.name%></p>
+                    <div class="followers-following">
+                        <div class="followers">
+                            <p class="follow-label">Followers</p>
+                            <p class="follow-number">
+                                <%= user.followers.length %>
+                            </p>
+                        </div>
+                        <div class="following">
+                            <p class="follow-label">Following</p>
+                            <p class="follow-number">
+                                <%= user.followed.length %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-email">
+                            <p class="profile-label"><%=user.email%></p>
+                            <p class="profile-label-lite">Email</p>
+                        </div>
+                        <% if(user.phone) { %>
+                        <div class="profile-phone">
+                            <p class="profile-label">
+                                <%= user.formattedPhone %>
+                            </p>
+                            <p class="profile-label-lite">Phone</p>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="all-posts">
+                <div class="post-container">
+                    <div class="new-post-header">
+                        <img
+                            src="<%= user.profile_picture%>"
+                            alt="Profile Pic"
+                        />
+                        <div class="post-form">
+                            <form action="" method="POST">
+                                <label for="post"></label>
+                                <textarea
+                                    name="post"
+                                    id="post"
+                                    cols="30"
+                                    rows="3"
+                                    placeholder="Write a new post"
+                                    required
+                                ></textarea>
+                                <button type="submit">Post</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- If there are posts  -->
+                <% if(posts) { %>
+                <!-- Loop through each one  -->
+                <% posts.forEach(function(post, index) { %> <%
+                <!-- checks if post is from the current user or from a user the current one follows  -->
+                if(post.author._id.toString() === user._id.toString()) { %>
+                <div class="post-container">
+                    <div class="post-header">
+                        <img
+                            src="<%= post.author.profile_picture %>"
+                            alt="profile pic"
+                        />
+                        <div class="post-header-info">
+                            <p class="author-name"><%= post.author.name %></p>
+                            <p class="date-time">
+                                <%=post.formattedTimestamp%>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="post-body">
+                        <p><%= post.post %></p>
+                        <div class="likes-comments-counter">
+                            <p>
+                                <%= post.likes.length %> likes -
+                                <%=post.comments.length %> comments
+                            </p>
+                            <div class="post-footer-icons">
+                                <form
+                                    action="/dashboard/likes"
+                                    method="POST"
+                                    id="likeForm<%= index %>"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="userWhoLikes"
+                                        value="<%=user._id%>"
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="postId"
+                                        value="<%= post._id %>"
+                                    />
+                                    <% if(!post.likes.includes(user._id)) { %>
+                                    <i
+                                        class="fa-regular fa-thumbs-up"
+                                        style="cursor: pointer"
+                                        onclick="submitLikeForm('<%=index%>')"
+                                    ></i>
+                                    <% } else { %>
 
-        <h1>Posts</h1>
-        <!-- If there are posts  -->
-        <% if(posts) { %>
-        <!-- Loop through each one  -->
-        <% posts.forEach(function(post) { %> <%
-        <!-- checks if post is from the current user  -->
-        if(post.author._id.toString() === user._id.toString()) { %>
-        <div>
-            <h3>Post Author: <%= post.author.username %></h3>
-            <p><em>(<%=post.timestamp%>)</em></p>
-            <p><%= post.post %></p>
-            <form action="/userPage/likes" method="POST">
-                <input
-                    type="hidden"
-                    name="userToFollow"
-                    value="<%=user._id%>"
-                />
-                <input type="hidden" name="postId" value="<%= post._id %>" />
-                <button type="submit">Like</button>
-            </form>
-            <p><%= post.likes.length %></p>
-            <br />
-            <% if(post.comments) { %>
-            <h3><%= post.comments.length %> Comments</h3>
-            <% post.comments.forEach(function(comment) { %>
-            <p>Comment Author: <em>(<%= comment.author.name %>)</em></p>
-            <p><%= comment.content %></p>
-            <% })} %>
-
-            <form action="/userPage/comments" method="POST">
-                <input
-                    type="hidden"
-                    name="userToFollow"
-                    value="<%=user._id%>"
-                />
-
-                <label for="content">New Comment</label>
-                <textarea
-                    name="content"
-                    id="content"
-                    cols="30"
-                    rows="10"
-                ></textarea>
-                <input type="hidden" name="postId" value="<%= post._id %>" />
-                <button type="submit">Submit Comment</button>
-            </form>
+                                    <i
+                                        class="fa-solid fa-thumbs-up"
+                                        style="cursor: pointer"
+                                        onclick="submitLikeForm('<%=index%>')"
+                                    ></i>
+                                    <% } %>
+                                </form>
+                                <i
+                                    id="iconReg<%= index %>"
+                                    class="fa-regular fa-comment"
+                                    style="display: block; cursor: pointer"
+                                    onclick="openCommentsForm('<%= index %>')"
+                                ></i>
+                                <i
+                                    class="fa-solid fa-comment"
+                                    id="iconSolid<%=index%>"
+                                    style="display: none; cursor: pointer"
+                                    onclick="openCommentsForm('<%= index %>')"
+                                ></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-footer">
+                        <div class="comments">
+                            <% if(post.comments) { %> <%
+                            post.comments.forEach(function(comment) { %>
+                            <div class="comments-comment">
+                                <div class="comments-image">
+                                    <img
+                                        src="<%=comment.author.profile_picture%>"
+                                        alt="profile pic"
+                                    />
+                                </div>
+                                <div class="comments-content">
+                                    <div class="comment-name-time">
+                                        <p class="author-name">
+                                            <%= comment.author.name %>
+                                        </p>
+                                        <p class="date-time">
+                                            <%= comment.formattedCreatedAt %>
+                                        </p>
+                                    </div>
+                                    <div class="comment-text">
+                                        <p><%= comment.content %></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% })} %>
+                        </div>
+                        <div
+                            class="comments-form-container"
+                            id="commentsFormContainer<%=index%>"
+                            style="display: none"
+                        >
+                            <div class="comments-form">
+                                <div class="new-comments-image">
+                                    <img
+                                        src="<%= user.profile_picture %>"
+                                        alt="Profile Pic"
+                                    />
+                                </div>
+                                <form
+                                    action="/dashboard/comments"
+                                    method="POST"
+                                    id="commentForm<%= index %>"
+                                >
+                                    <label
+                                        for="commentContent<%=index%>"
+                                    ></label>
+                                    <div class="comments-form-text-button">
+                                        <textarea
+                                            name="content"
+                                            placeholder="Add a comment"
+                                            id="commentContent<%=index%>"
+                                            class="comment-form-input"
+                                            cols="30"
+                                            rows="3"
+                                            required
+                                        ></textarea>
+                                        <input
+                                            type="hidden"
+                                            name="postId"
+                                            value="<%= post._id %>"
+                                        />
+                                        <button type="submit" id="postButton">
+                                            Post
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %> <% }) %> <% } %>
+            </div>
         </div>
-        <% } %> <% }) %> <% } %>
-
-        <h1>New Post</h1>
-        <form action="" method="POST">
-            <label for="post">Post</label>
-            <textarea
-                name="post"
-                id="post"
-                cols="30"
-                rows="10"
-                required
-            ></textarea>
-            <button type="submit">Submit Post</button>
-        </form>
     </body>
 </html>

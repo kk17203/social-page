@@ -38,13 +38,19 @@
 
 .post-footer {
     padding: 10px;
-    border-top: 1px solid #ccc;
+    /* border-top: 1px solid #ccc; */
 }
 
 .likes-comments-counter {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.likes-comments-counter p {
+    color: rgba(87, 86, 86, 0.751);
+    font-size: 0.9rem;
+    margin-left: 5px;
 }
 
 .post-footer-icons {
@@ -66,7 +72,10 @@
 .comments-comment {
     display: flex;
     /* width: 80%; */
-    margin: 10px 10px 10px 40px;
+    margin: 0px 10px 0px 40px;
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+    padding-bottom: 5px;
 }
 
 .comments-comment img {
@@ -79,6 +88,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding-left: 8px;
 }
 
 .comments-content p {
