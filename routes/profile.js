@@ -20,6 +20,11 @@ router.get(
             _id: { $in: currentUser.followers },
         });
 
+        // Find users that their id is inside currentUser.followed array
+        const following = await User.find({
+            _id: { $in: currentUser.followed },
+        });
+
         const posts = await Post.find({})
             .populate("comments.author")
             .sort({ timestamp: -1 })
@@ -31,6 +36,7 @@ router.get(
             posts: posts,
             currentPage: "/profile",
             followers: followers,
+            following: following,
         });
     })
 );

@@ -1,14 +1,14 @@
-<div id="followersPopUp" class="modal">
-    <div class="followers-popup-content">
+<div id="followingPopUp" class="modal">
+    <div class="following-popup-content">
         <div class="all-users-popup">
-            <% if(followers.length > 0 ) { %> <%
-            followers.forEach(function(follower) { %> <%
-            if(currentUser._id.toString() !== follower._id.toString()) { %>
+            <% if(following.length > 0 ) { %> <%
+            following.forEach(function(follow) { %> <%
+            if(currentUser._id.toString() !== follow._id.toString()) { %>
             <div class="user-container">
                 <div class="user-link">
-                    <a href="/userPage/<%= follower._id %>">
+                    <a href="/userPage/<%= follow._id %>">
                         <img
-                            src="<%= follower.profile_picture %>"
+                            src="<%= follow.profile_picture %>"
                             alt="Profile Pic"
                             class="profile-pic"
                         />
@@ -17,9 +17,9 @@
                 <div class="user-info-form-container">
                     <div class="user-list-info-and-form">
                         <div class="users-list-info">
-                            <p class="users-list-name"><%=follower.name%></p>
+                            <p class="users-list-name"><%=follow.name%></p>
                             <p class="users-list-username">
-                                <%= follower.username %>
+                                <%= follow.username %>
                             </p>
                         </div>
                     </div>

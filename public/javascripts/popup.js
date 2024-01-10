@@ -33,15 +33,32 @@ function selectProfilePicture(labelId, imageId) {
 //     document.getElementById("userPageForm").submit();
 // }
 
-document.getElementById("followers").addEventListener("click", function () {
-    document.getElementById("followersPopUp").style.display = "block";
-});
+// /// FOLLOWERS POP-UP ///
 
-// Close the modal if user clicks outside of it
-window.addEventListener("click", function (event) {
-    const followersPopUp = document.getElementById("followersPopUp");
+// document.getElementById("followers").addEventListener("click", function () {
+//     document.getElementById("followersPopUp").style.display = "block";
+// });
 
-    if (event.target === followersPopUp) {
-        followersPopUp.style.display = "none";
-    }
-});
+// // Close the modal if user clicks outside of it
+// window.addEventListener("click", function (event) {
+//     const followersPopUp = document.getElementById("followersPopUp");
+
+//     if (event.target === followersPopUp) {
+//         followersPopUp.style.display = "none";
+//     }
+// });
+
+// /// FOLLOWING POP-UP ///
+
+// document.getElementById("following").addEventListener("click", function () {
+//     document.getElementById("followingPopUp").style.display = "block";
+// });
+
+// // Close the modal if user clicks outside of it
+// window.addEventListener("click", function (event) {
+//     const followingPopUp = document.getElementById("followingPopUp");
+
+//     if (event.target === followingPopUp) {
+//         followingPopUp.style.display = "none";
+//     }
+// });
