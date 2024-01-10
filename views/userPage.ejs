@@ -110,6 +110,24 @@
                         <% } %>
                     </div>
 
+                    <form action="/userPage/followUser" method="POST">
+                        <input
+                            type="hidden"
+                            name="userToFollow"
+                            value="<%=user._id%>"
+                        />
+
+                        <% if(!currentUser.followed.includes(user._id)) { %>
+                        <button class="follow-button" type="submit">
+                            Follow
+                        </button>
+                        <% } else { %>
+                        <button class="unfollow-button" type="submit">
+                            Unfollow
+                        </button>
+                        <% } %>
+                    </form>
+
                     <div class="profile-info">
                         <div class="profile-email">
                             <p class="profile-label"><%=user.email%></p>
