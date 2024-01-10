@@ -339,12 +339,53 @@
 .user-link img {
     border-radius: 10px;
 }
+.user-info-form-container {
+    width: 100%;
+}
 
 .user-list-info-and-form {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+}
+
+.users-list-follow-form {
+    margin-top: 10px;
+}
+
+.follow-button {
+    padding: 10px;
+    color: rgb(90, 90, 90);
+    border-radius: 10px;
+    border: 0.2px solid rgba(0, 128, 0, 0.459);
+    background-color: rgba(0, 128, 0, 0.138);
+    cursor: pointer;
+}
+
+.follow-button:hover {
+    background-color: #cccccc4f;
+}
+
+.follow-button:active {
+    box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
+}
+
+.unfollow-button {
+    padding: 10px;
+    background-color: #cccccc23;
+    border-radius: 10px;
+    border: 0.2px solid rgba(0, 128, 0, 0.459);
+    color: green;
+    cursor: pointer;
+}
+
+.unfollow-button:hover {
+    background-color: #cccccc4f;
+}
+
+.unfollow-button:active {
+    box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
 }
 
 .users-list-info p {

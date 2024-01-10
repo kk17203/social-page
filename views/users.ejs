@@ -23,26 +23,38 @@
                             />
                         </a>
                     </div>
-                    <div class="user-list-info-and-form">
-                        <div class="users-list-info">
-                            <p class="users-list-name"><%=user.name%></p>
-                            <p class="users-list-username">
-                                <%= user.username %>
-                            </p>
-                        </div>
-                        <div class="users-list-follow-form">
-                            <form action="" method="POST">
-                                <input
-                                    type="hidden"
-                                    name="userToFollow"
-                                    value="<%=user._id%>"
-                                />
-                                <button type="submit">
+                    <div class="user-info-form-container">
+                        <div class="user-list-info-and-form">
+                            <div class="users-list-info">
+                                <p class="users-list-name"><%=user.name%></p>
+                                <p class="users-list-username">
+                                    <%= user.username %>
+                                </p>
+                            </div>
+                            <div class="users-list-follow-form">
+                                <form action="" method="POST">
+                                    <input
+                                        type="hidden"
+                                        name="userToFollow"
+                                        value="<%=user._id%>"
+                                    />
+
                                     <%
                                     if(!currentUser.followed.includes(user._id))
-                                    { %> Follow <% } else { %> Unfollow <% } %>
-                                </button>
-                            </form>
+                                    { %>
+                                    <button class="follow-button" type="submit">
+                                        Follow
+                                    </button>
+                                    <% } else { %>
+                                    <button
+                                        class="unfollow-button"
+                                        type="submit"
+                                    >
+                                        Unfollow
+                                    </button>
+                                    <% } %>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,13 @@ router.get(
             return res.redirect("/");
         }
 
+        const currentUserId = req.user._id;
+        const currentUser = await User.findById(currentUserId);
+        // Find users that their id is inside currentUser.followers array
+        const followers = await User.find({
+            _id: { $in: currentUser.followers },
+        });
+
         const posts = await Post.find({})
             .populate("comments.author")
             .sort({ timestamp: -1 })
@@ -23,6 +30,7 @@ router.get(
             user: req.user,
             posts: posts,
             currentPage: "/profile",
+            followers: followers,
         });
     })
 );

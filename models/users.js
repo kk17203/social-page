@@ -19,8 +19,8 @@ const UserSchema = new Schema({
         },
     ],
     createdAt: { type: Date, default: Date.now },
-    followers: [{ type: Schema.Types.ObjectId, ref: "Users" }],
-    followed: [{ type: Schema.Types.ObjectId, ref: "Users" }], // Array of ref to other users they follow
+    followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    followed: [{ type: Schema.Types.ObjectId, ref: "User" }], // Array of ref to other users they follow
 });
 
 //Virtual for author's full name

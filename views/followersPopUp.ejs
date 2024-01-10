@@ -1,0 +1,34 @@
+<button id="openModalBtn" class="open-modal-button">
+    Choose Profile Picture
+</button>
+
+<div id="followersPopUp" class="modal">
+    <div class="followers-popup-content">
+        <div class="all-users-popup">
+            <% if(followers) { %> <% followers.forEach(function(follower) { %>
+            <% if(currentUser._id.toString() !== follower._id.toString()) { %>
+            <div class="user-container">
+                <div class="user-link">
+                    <a href="/userPage/<%= follower._id %>">
+                        <img
+                            src="<%= follower.profile_picture %>"
+                            alt="Profile Pic"
+                            class="profile-pic"
+                        />
+                    </a>
+                </div>
+                <div class="user-info-form-container">
+                    <div class="user-list-info-and-form">
+                        <div class="users-list-info">
+                            <p class="users-list-name"><%=follower.name%></p>
+                            <p class="users-list-username">
+                                <%= follower.username %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %> <% })} %>
+        </div>
+    </div>
+</div>

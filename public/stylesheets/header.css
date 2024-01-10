@@ -68,4 +68,7 @@
 
 a {
     text-decoration: none;
+    text-align: center;
+    color: rgba(0, 128, 0, 0.809);
+    margin-top: 5px;
 }

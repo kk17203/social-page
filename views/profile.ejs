@@ -5,6 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+        <link rel="stylesheet" href="/stylesheets/popup.css" />
+        <script src="/javascripts/popup.js" defer></script>
+
         <script
             src="https://kit.fontawesome.com/008151671d.js"
             crossorigin="anonymous"
@@ -27,6 +30,7 @@
                     <p class="profile-name"><%=user.name%></p>
                     <div class="followers-following">
                         <div class="followers">
+                            <div><%- include('followersPopUp') %></div>
                             <p class="follow-label">Followers</p>
                             <p class="follow-number">
                                 <%= user.followers.length %>
