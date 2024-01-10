@@ -11,7 +11,7 @@ router.get("/", (req, res, next) => {
         return res.redirect("/dashboard");
     }
 
-    res.render("index", { title: "Index" });
+    res.render("index", { title: "Log In" });
 });
 
 // POST for log-in form
