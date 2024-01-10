@@ -6,11 +6,16 @@
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <link rel="stylesheet" href="/stylesheets/dashboard.css" />
         <link rel="stylesheet" href="/stylesheets/header.css" />
+        <link rel="stylesheet" href="/stylesheets/popup.css" />
+
         <script
             src="https://kit.fontawesome.com/008151671d.js"
             crossorigin="anonymous"
         ></script>
+        <script src="/javascripts/popup.js" defer></script>
         <script src="/javascripts/script.js" defer></script>
+        <script src="/javascripts/followersPopUp.js" defer></script>
+        <script src="/javascripts/followingPopUp.js" defer></script>
 
         <title><%= title %></title>
     </head>
@@ -59,19 +64,52 @@
                     />
                     <p class="profile-name"><%=user.name%></p>
                     <div class="followers-following">
+                        <!-- IF USER HAS FOLLOWERS  -->
+                        <% if(followers.length > 0) { %>
+                        <!-- MAKE THE LABEL AND NUMBER A LINK TO POPUP  -->
+                        <div class="followers" id="followers">
+                            <div><%- include('followersPopUp') %></div>
+                            <p class="follow-label" style="cursor: pointer">
+                                Followers
+                            </p>
+                            <p class="follow-number" style="cursor: pointer">
+                                <%= user.followers.length %>
+                            </p>
+                        </div>
+                        <!-- IF USER DOES NOT HAVE FOLLOWERS  -->
+                        <% } else { %>
+                        <!-- MAKE THE LABEL AND NUMBER BE STATIC  -->
                         <div class="followers">
                             <p class="follow-label">Followers</p>
                             <p class="follow-number">
                                 <%= user.followers.length %>
                             </p>
                         </div>
+                        <% } %>
+                        <!-- IF USER IS FOLLOWING PEOPLE  -->
+                        <% if(following.length > 0) { %>
+                        <!-- MAKE THE LABEL AND NUMBER A LINK TO POPUP  -->
+                        <div class="following" id="following">
+                            <div><%- include('followingPopUp') %></div>
+                            <p class="follow-label" style="cursor: pointer">
+                                Following
+                            </p>
+                            <p class="follow-number" style="cursor: pointer">
+                                <%= user.followed.length %>
+                            </p>
+                        </div>
+                        <!-- IF USER IS NOT FOLLOWING PEOPLE  -->
+                        <% } else { %>
+                        <!-- MAKE THE LABEL AND NUMBER BE STATIC  -->
                         <div class="following">
                             <p class="follow-label">Following</p>
                             <p class="follow-number">
                                 <%= user.followed.length %>
                             </p>
                         </div>
+                        <% } %>
                     </div>
+
                     <div class="profile-info">
                         <div class="profile-email">
                             <p class="profile-label"><%=user.email%></p>

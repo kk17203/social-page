@@ -2,8 +2,7 @@
     <div class="followers-popup-content">
         <div class="all-users-popup">
             <% if(followers.length > 0 ) { %> <%
-            followers.forEach(function(follower) { %> <%
-            if(currentUser._id.toString() !== follower._id.toString()) { %>
+            followers.forEach(function(follower) { %>
             <div class="user-container">
                 <div class="user-link">
                     <a href="/userPage/<%= follower._id %>">
@@ -25,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <% } %> <% })} %>
+            <% })} %>
         </div>
     </div>
 </div>
