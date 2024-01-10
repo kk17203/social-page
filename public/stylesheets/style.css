@@ -21,3 +21,75 @@ body {
 .profile-pic {
     width: 100px;
 }
+
+/* SIGN UP  */
+.global-header-title {
+    display: flex;
+    height: 100px;
+    margin: 0 21px;
+    padding: 0 16px;
+    max-width: 1250px;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+}
+
+.main-signup {
+    margin: 100px 21px;
+    padding: 20px;
+    max-width: 1250px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 1px solid green;
+}
+
+.signup-form {
+    padding: 20px;
+}
+
+.signup-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text-input {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    width: 100%;
+}
+
+.text-input label {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    width: 70%;
+    color: #808080;
+}
+
+.signup-pic-container {
+    padding: 20px;
+    /* width: 50%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-pic-selection {
+    background-color: #fff;
+    /* margin: 5% auto; */
+    padding: 20px;
+    width: 440px;
+}
