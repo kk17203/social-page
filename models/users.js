@@ -5,13 +5,20 @@ const UserSchema = new Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String, required: true },
-    phone: { type: String, required: true },
+    phone: { type: String },
     first_name: { type: String, required: true },
     last_name: { type: String, required: true },
     profile_picture: {
         type: String,
         default: "/images/cartoon-rocket-ai-crop.jpg",
     },
+    loginHistory: [
+        {
+            timestamp: { type: Date, default: Date.now },
+            ipAddress: { type: String },
+        },
+    ],
+    createdAt: { type: Date, default: Date.now },
     followers: [{ type: Schema.Types.ObjectId, ref: "Users" }],
     followed: [{ type: Schema.Types.ObjectId, ref: "Users" }], // Array of ref to other users they follow
 });

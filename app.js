@@ -27,9 +27,9 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 main().catch((err) => console.log(err));
 async function main() {
-    console.log("connecting database");
+    console.log("CONNECTING TO DATABASE");
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("database connection success");
+    console.log("DATABASE CONNECTION SUCCESS");
 }
 
 // view engine setup

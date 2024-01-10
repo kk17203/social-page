@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const asyncHandler = require("express-async-handler");
+const User = require("../models/users");
 
 /* GET home page. */
 router.get("/", (req, res, next) => {

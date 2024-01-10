@@ -4,21 +4,41 @@ const bcrypt = require("bcryptjs");
 
 module.exports = function (passport) {
     passport.use(
-        new LocalStrategy(async (username, password, done) => {
-            try {
-                const user = await User.findOne({ username: username });
-                if (!user) {
-                    return done(null, false, { message: "Incorrect username" });
+        new LocalStrategy(
+            { passReqToCallback: true },
+            async (req, username, password, done) => {
+                try {
+                    const user = await User.findOne({ username: username });
+                    if (!user) {
+                        return done(null, false, {
+                            message: "Incorrect username",
+                        });
+                    }
+                    const isMatch = await bcrypt.compare(
+                        password,
+                        user.password
+                    ); // Matches bcryptjs passwords
+                    if (!isMatch) {
+                        return done(null, false, {
+                            message: "Incorrect password",
+                        });
+                    }
+
+                    // login history logic
+                    const newLoginHistory = {
+                        timestamp: new Date(),
+                        ipAddress: req.ip,
+                    };
+
+                    user.loginHistory.push(newLoginHistory);
+                    await user.save();
+
+                    return done(null, user);
+                } catch (err) {
+                    return done(err);
                 }
-                const isMatch = await bcrypt.compare(password, user.password); // Matches bcryptjs passwords
-                if (!isMatch) {
-                    return done(null, false, { message: "Incorrect password" });
-                }
-                return done(null, user);
-            } catch (err) {
-                return done(err);
             }
-        })
+        )
     );
 
     passport.serializeUser((user, done) => {

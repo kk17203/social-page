@@ -66,7 +66,6 @@ router.post(
 
         // Save the new Comment to DB
         await post.save();
-        console.log(`THIS ${req.originalUrl}`);
         res.redirect("/dashboard");
     })
 );
