@@ -314,3 +314,42 @@
     color: rgba(87, 86, 86, 0.751);
     font-size: 0.9rem;
 }
+
+/* USERS  */
+
+.all-users {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 70%;
+}
+
+.user-container {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(13, 13, 18, 0.04);
+    padding: 16px;
+    display: flex;
+    justify-content: space-around;
+    /* margin: 10px; */
+    /* border: 1px solid black; */
+}
+
+.user-list-info-and-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.users-list-info p {
+    margin: 5px;
+}
+
+.users-list-name {
+    font-weight: 550;
+}
+
+.users-list-username {
+    color: rgba(87, 86, 86, 0.751);
+    font-size: 0.9rem;
+}

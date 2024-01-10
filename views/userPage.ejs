@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+        <link rel="stylesheet" href="/stylesheets/header.css" />
         <script
             src="https://kit.fontawesome.com/008151671d.js"
             crossorigin="anonymous"
@@ -14,7 +15,40 @@
         <title><%= title %></title>
     </head>
     <body>
-        <div><%- include('header') %></div>
+        <!-- HEADER -->
+        <div class="global-header">
+            <div class="global-nav-bar">
+                <a href="/dashboard">
+                    <img class="logo" src="/images/POCO_With.png" alt="logo" />
+                </a>
+                <div class="global-nav">
+                    <a
+                        href="/dashboard"
+                        class="<%= currentPage === '/dashboard' ? 'active' : '' %>"
+                        >Dashboard</a
+                    >
+                    <a
+                        href="/profile"
+                        class="<%= currentPage === '/profile' ? 'active' : '' %>"
+                        >Profile Page</a
+                    >
+                    <a
+                        href="/users"
+                        class="<%= currentPage === '/users' ? 'active' : '' %>"
+                        >Users</a
+                    >
+                </div>
+                <div class="user-nav">
+                    <img
+                        src="<%= currentUser.profile_picture %>"
+                        alt="Profile Pic"
+                        class="profile-pic"
+                    />
+                    <a href="/logout">Log Out</a>
+                </div>
+            </div>
+        </div>
+        <!-- MAIN  -->
         <div class="main">
             <div class="sidebar">
                 <div class="profile-sidebar">

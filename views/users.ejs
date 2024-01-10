@@ -4,36 +4,50 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/dashboard.css" />
         <title><% title %></title>
     </head>
     <body>
-        <h1><%= title %></h1>
         <div><%- include('header') %></div>
-
-        <% if(users) { %> <% users.forEach(function(user) { %> <%
-        if(currentUser._id.toString() !== user._id.toString()) { %>
-        <div>
-            <a href="/userPage/<%= user._id %>">
-                <img
-                    src="<%= user.profile_picture %>"
-                    alt="Profile Pic"
-                    class="profile-pic"
-                />
-            </a>
-            <h3>Username: <%=user.username%></h3>
-            <p>Name: <%=user.name%></p>
-            <form action="" method="POST">
-                <input
-                    type="hidden"
-                    name="userToFollow"
-                    value="<%=user._id%>"
-                />
-                <button type="submit">
-                    <% if(!currentUser.followed.includes(user._id)) { %> Follow
-                    <% } else { %> Unfollow <% } %>
-                </button>
-            </form>
+        <div class="main">
+            <div class="all-users">
+                <% if(users) { %> <% users.forEach(function(user) { %> <%
+                if(currentUser._id.toString() !== user._id.toString()) { %>
+                <div class="user-container">
+                    <div class="user-link">
+                        <a href="/userPage/<%= user._id %>">
+                            <img
+                                src="<%= user.profile_picture %>"
+                                alt="Profile Pic"
+                                class="profile-pic"
+                            />
+                        </a>
+                    </div>
+                    <div class="user-list-info-and-form">
+                        <div class="users-list-info">
+                            <p class="users-list-name"><%=user.name%></p>
+                            <p class="users-list-username">
+                                <%= user.username %>
+                            </p>
+                        </div>
+                        <div class="users-list-follow-form">
+                            <form action="" method="POST">
+                                <input
+                                    type="hidden"
+                                    name="userToFollow"
+                                    value="<%=user._id%>"
+                                />
+                                <button type="submit">
+                                    <%
+                                    if(!currentUser.followed.includes(user._id))
+                                    { %> Follow <% } else { %> Unfollow <% } %>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <% } %> <% })} %>
+            </div>
         </div>
-        <% } %> <% })} %>
     </body>
 </html>
