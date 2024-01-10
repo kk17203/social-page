@@ -29,10 +29,12 @@
                     <div><%- include('profilePicForm') %></div>
                     <p class="profile-name"><%=user.name%></p>
                     <div class="followers-following">
-                        <div class="followers">
+                        <div class="followers" id="followers">
                             <div><%- include('followersPopUp') %></div>
-                            <p class="follow-label">Followers</p>
-                            <p class="follow-number">
+                            <p class="follow-label" style="cursor: pointer">
+                                Followers
+                            </p>
+                            <p class="follow-number" style="cursor: pointer">
                                 <%= user.followers.length %>
                             </p>
                         </div>
