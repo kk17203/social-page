@@ -33,11 +33,6 @@ router.post(
         const userToFollowId = req.body.userToFollow; // returns id
         const userToFollow = await User.findById(userToFollowId); // Find User with id of userToFollowId
 
-        console.log(currentUser);
-        console.log(`currentUserId ${currentUserId}`);
-        console.log(`userToFollowId ${userToFollowId}`);
-        console.log(`User to Follow ${userToFollow}`);
-
         // Check if already followed in array
         if (!currentUser.followed.includes(userToFollowId)) {
             // Add user that we want to follow into current users followed array

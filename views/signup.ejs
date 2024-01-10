@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <link rel="stylesheet" href="/stylesheets/style.css" />
         <link rel="stylesheet" href="/stylesheets/dashboard.css" />
         <link rel="stylesheet" href="/stylesheets/header.css" />
         <link rel="stylesheet" href="/stylesheets/popup.css" />
 
-        <script src="/javascripts/popup.js" defer></script>
+        <script src="/javascripts/signUp.js" defer></script>
         <script src="/javascripts/script.js" defer></script>
 
         <title>Sign up</title>
@@ -96,8 +97,9 @@
                                     <img
                                         src="/images/bike-sunset-crop.jpg"
                                         alt="Bike Pic"
-                                        class="profile-pic"
+                                        class="profile-pic-signup"
                                         id="bike"
+                                        style="cursor: pointer"
                                         onclick="selectProfilePicture('profilePic1', 'bike')"
                                     />
                                 </label>
@@ -112,7 +114,7 @@
                                     <img
                                         src="/images/border-collie-ai-generated-crop.jpg"
                                         alt="Boarder Collie"
-                                        class="profile-pic"
+                                        class="profile-pic-signup"
                                         id="borderCollie"
                                         onclick="selectProfilePicture('profilePic2', 'borderCollie')"
                                     />
@@ -128,7 +130,7 @@
                                     <img
                                         src="/images/cartoon-rocket-ai-crop.jpg"
                                         alt="Rocket"
-                                        class="profile-pic"
+                                        class="profile-pic-signup"
                                         id="rocket"
                                         onclick="selectProfilePicture('profilePic3', 'rocket')"
                                     />
@@ -144,7 +146,7 @@
                                     <img
                                         src="/images/flowers-ai-crop.jpg"
                                         alt="Flowers"
-                                        class="profile-pic"
+                                        class="profile-pic-signup"
                                         id="flowers"
                                         onclick="selectProfilePicture('profilePic4', 'flowers')"
                                     />
@@ -160,7 +162,7 @@
                                     <img
                                         src="/images/kitten-generative-ai-crop.jpg"
                                         alt="Kitten"
-                                        class="profile-pic"
+                                        class="profile-pic-signup"
                                         id="kitten"
                                         onclick="selectProfilePicture('profilePic5', 'kitten')"
                                     />
@@ -176,7 +178,7 @@
                                     <img
                                         src="/images/mug-with-marshmallow-snowman-crop.jpg"
                                         alt="Mug with Marshmallow Snowman"
-                                        class="profile-pic"
+                                        class="profile-pic-signup"
                                         id="marshmallowMug"
                                         onclick="selectProfilePicture('profilePic6', 'marshmallowMug')"
                                     />
@@ -192,7 +194,7 @@
                                     <img
                                         src="/images/raccoon-generative-ai-crop.jpg"
                                         alt="Raccoon"
-                                        class="profile-pic"
+                                        class="profile-pic-signup"
                                         id="raccoon"
                                         onclick="selectProfilePicture('profilePic7', 'raccoon')"
                                     />
@@ -208,7 +210,7 @@
                                     <img
                                         src="/images/snoman-crop.jpg"
                                         alt="Snowman"
-                                        class="profile-pic"
+                                        class="profile-pic-signup"
                                         id="snowman"
                                         onclick="selectProfilePicture('profilePic8', 'snowman')"
                                     />
@@ -216,7 +218,9 @@
                             </div>
                         </div>
                         <input type="hidden" name="action" value="signup" />
-                        <button type="submit">Sign Up</button>
+                        <button class="sign-up-button" type="submit">
+                            Sign Up
+                        </button>
                     </form>
                 </div>
             </div>

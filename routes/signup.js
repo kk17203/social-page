@@ -16,8 +16,15 @@ router.post(
         const action = req.body.action;
 
         if (action === "signup") {
-            const { username, password, email, phone, first_name, last_name } =
-                req.body;
+            const {
+                username,
+                password,
+                email,
+                phone,
+                first_name,
+                last_name,
+                profilePicture,
+            } = req.body;
 
             // Hash and Salt password before save
             const saltRounds = 10;
@@ -31,13 +38,19 @@ router.post(
                 phone,
                 first_name,
                 last_name,
+                profile_picture: profilePicture,
             });
 
             // Save newUser to DB
             await newUser.save();
-            res.redirect("/");
 
-            // Where the auto login function will go
+            // Log the user in automatically by creating a session
+            req.login(newUser, (err) => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect("/");
+            });
         }
     })
 );

@@ -87,9 +87,39 @@ body {
     align-items: center;
 }
 
+.profile-pic-signup {
+    width: 100px;
+    border-radius: 10px;
+    border: 1px solid green;
+}
+
 .signup-pic-selection {
     background-color: #fff;
     /* margin: 5% auto; */
-    padding: 20px;
-    width: 440px;
+    /* padding: 20px 20px 0px 20px; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+
+.sign-up-button {
+    padding: 10px;
+    color: rgb(90, 90, 90);
+    border-radius: 10px;
+    border: 0.2px solid rgba(0, 128, 0, 0.459);
+    background-color: rgba(0, 128, 0, 0.138);
+    cursor: pointer;
+}
+
+.sign-up-button:hover {
+    background-color: #cccccc4f;
+}
+
+.sign-up-button:active {
+    box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
+}
+
+.selected-profile-pic-signup {
+    border: 5px solid green;
+    box-sizing: border-box;
 }
