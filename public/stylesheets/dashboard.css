@@ -319,7 +319,8 @@
 
 .all-users {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    /* grid-template-columns: repeat(3, 1fr); */
+    grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
     gap: 10px;
     width: 70%;
 }
@@ -335,10 +336,15 @@
     /* border: 1px solid black; */
 }
 
+.user-link img {
+    border-radius: 10px;
+}
+
 .user-list-info-and-form {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 
 .users-list-info p {
