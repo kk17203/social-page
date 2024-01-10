@@ -86,10 +86,16 @@
                 if(post.author._id.toString() === user._id.toString()) { %>
                 <div class="post-container">
                     <div class="post-header">
-                        <img
-                            src="<%= post.author.profile_picture %>"
-                            alt="profile pic"
-                        />
+                        <div class="user-link">
+                            <a href="/userPage/<%= post.author._id %>">
+                                <img
+                                    src="<%= post.author.profile_picture %>"
+                                    alt="Profile Pic"
+                                    class="profile-pic"
+                                />
+                            </a>
+                        </div>
+
                         <div class="post-header-info">
                             <p class="author-name"><%= post.author.name %></p>
                             <p class="date-time">
@@ -155,12 +161,18 @@
                             <% if(post.comments) { %> <%
                             post.comments.forEach(function(comment) { %>
                             <div class="comments-comment">
-                                <div class="comments-image">
-                                    <img
-                                        src="<%=comment.author.profile_picture%>"
-                                        alt="profile pic"
-                                    />
+                                <div class="user-link comments-image">
+                                    <a
+                                        href="/userPage/<%= comment.author._id %>"
+                                    >
+                                        <img
+                                            src="<%= comment.author.profile_picture %>"
+                                            alt="Profile Pic"
+                                            class="profile-pic"
+                                        />
+                                    </a>
                                 </div>
+
                                 <div class="comments-content">
                                     <div class="comment-name-time">
                                         <p class="author-name">
