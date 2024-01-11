@@ -11,6 +11,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
 require("./routes/passport-config")(passport); //Link to passport config file
+const compression = require("compression");
+const helmet = require("helmet");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
@@ -32,6 +34,15 @@ async function main() {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log("DATABASE CONNECTION SUCCESS");
 }
+
+//Set up rate limiter: max of 20 requests per min
+// const RateLimit = require("express-rate-limit");
+// const limiter = RateLimit({
+//     windowMs: 1 * 60 * 1000, // 1 Min
+//     max: 500,
+// });
+// // Apply rate limiter to all requests
+// app.use(limiter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -58,6 +69,16 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
 });
+
+// app.use(
+//     helmet.contentSecurityPolicy({
+//         directives: {
+//             "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+//         },
+//     })
+// );
+
+// app.use(compression()); // Compress all routes
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
