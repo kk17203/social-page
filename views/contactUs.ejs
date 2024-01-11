@@ -3,20 +3,81 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+        <link rel="stylesheet" href="/stylesheets/header.css" />
+        <link rel="stylesheet" href="/stylesheets/popup.css" />
+
         <title>Document</title>
     </head>
     <body>
-        <form action="" method="POST" id="contactForm">
-            <label for="name">Your Name:</label>
-            <input type="text" name="name" required />
+        <div><%- include('header') %></div>
+        <div class="main-login">
+            <div class="contact-container">
+                <h1>Contact Us</h1>
+                <form action="" method="POST" id="contactForm">
+                    <div class="login-inputs">
+                        <label for="name"
+                            >Your Name:
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                name="name"
+                                required
+                            />
+                        </label>
 
-            <label for="email">Your Email:</label>
-            <input type="email" name="email" required />
-
-            <label for="message">Your Message:</label>
-            <textarea name="message" required></textarea>
-
-            <button type="submit">Send Message</button>
-        </form>
+                        <label for="email"
+                            >Your Email:
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Optional Email"
+                            />
+                        </label>
+                        <label for="message"
+                            >Your Message:
+                            <textarea
+                                class="contact-content"
+                                name="message"
+                                placeholder="Website Feedback is Welcome!"
+                                cols="30"
+                                rows="10"
+                                required
+                            ></textarea>
+                        </label>
+                        <input
+                            type="hidden"
+                            name="userRealName"
+                            value="<%= user.name %>"
+                        />
+                        <input
+                            type="hidden"
+                            name="userName"
+                            value="<%= user.username %>"
+                        />
+                        <input
+                            type="hidden"
+                            name="userId"
+                            value="<%= user._id %>"
+                        />
+                    </div>
+                    <button type="submit" class="login-button">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+            <% if(typeof successMessage !== 'undefined' && successMessage) { %>
+            <div class="contact-container">
+                <p>Email Sent Successfully!</p>
+            </div>
+            <% } else if(typeof errorMessage !== 'undefined' && errorMessage) {
+            %>
+            <div class="contact-container">
+                <p>Error Sending Email</p>
+            </div>
+            <% } %>
+        </div>
     </body>
 </html>

@@ -194,3 +194,41 @@ body {
     border: 5px solid green;
     box-sizing: border-box;
 }
+
+/* CONTACT US  */
+
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 1px solid green;
+    width: 350px;
+}
+
+.contact-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+.contact-container label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    color: #808080;
+}
+
+.contact-container input,
+.contact-container textarea {
+    border-radius: 5px;
+    border: 0.5px solid green;
+    padding: 5px;
+}
+
+.contact-content {
+    resize: none;
+}
