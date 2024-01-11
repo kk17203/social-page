@@ -8,6 +8,7 @@ const UserSchema = new Schema({
     phone: { type: String },
     first_name: { type: String, required: true },
     last_name: { type: String, required: true },
+    adminPassword: { type: String },
     profile_picture: {
         type: String,
         default: "/images/cartoon-rocket-ai-crop.jpg",
@@ -28,6 +29,43 @@ UserSchema.virtual("name").get(function () {
     fullname = `${this.first_name} ${this.last_name}`;
 
     return fullname;
+});
+
+// Virtual for formatted creation date and time
+UserSchema.virtual("formattedCreatedAt").get(function () {
+    const options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+    };
+
+    return this.createdAt.toLocaleDateString("en-US", options);
+});
+
+// Virtual for loginHistory.timestamp
+UserSchema.virtual("formattedLastLogin").get(function () {
+    if (this.loginHistory.length > 0) {
+        const lastLogin = this.loginHistory[this.loginHistory.length - 1];
+
+        const lastLoginOptions = {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+        };
+
+        return lastLogin.timestamp.toLocaleDateString(
+            "en-US",
+            lastLoginOptions
+        );
+    } else {
+        return "No login history available.";
+    }
 });
 
 // Virtual for formatted phone number

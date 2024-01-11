@@ -232,3 +232,19 @@ body {
 .contact-content {
     resize: none;
 }
+
+/* ADMIN PAGE  */
+
+.admin-user-container {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.admin-user-container p {
+    margin: 5px;
+}
+
+.admin-user-container .admin-page-name strong {
+    margin-bottom: 10px;
+    text-decoration: underline;
+}

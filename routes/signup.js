@@ -39,6 +39,10 @@ router.post(
                 first_name,
                 last_name,
                 profile_picture: profilePicture,
+                loginHistory: {
+                    timestamp: new Date(),
+                    ipAddress: req.ip,
+                },
             });
 
             // Save newUser to DB

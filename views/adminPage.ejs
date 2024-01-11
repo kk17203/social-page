@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <title><%= title %></title>
+    </head>
+    <body>
+        <h1><%= title %></h1>
+        <p><% if(users) { %> <% users.forEach(function(user) { %></p>
+
+        <div class="admin-user-container">
+            <p class="admin-page-name"><strong><%= user.name %></strong></p>
+            <p>Username: <em><%= user.username %></em></p>
+            <p>Email: <em><%= user.email %></em></p>
+            <p>Phone: <em><%= user.phone %></em></p>
+            <p>Sign Up Date: <em><%= user.formattedCreatedAt %></em></p>
+            <p>Logged In: <em><%= user.loginHistory.length %></em></p>
+            <p>Last Login: <em><%= user.formattedLastLogin %></em></p>
+        </div>
+        <% }) } %>
+    </body>
+</html>
