@@ -12,6 +12,12 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+// const contactForm = document.getElementById("contactForm");
+
+// contactForm.addEventListener("submit", async (event) => {
+//     event.preventDefault();
+// });
+
 const mailOptions = {
     from: {
         name: "SOCIAL PAGE",
@@ -28,8 +34,6 @@ const sendMail = async (transporter, mailOptions) => {
         await transporter.sendMail(mailOptions);
         console.log("Email has been sent!");
     } catch (error) {
-        console.log("SMTP Configuration:", transporter.options);
-        console.log(process.env.USER_EMAIL);
         console.error(error);
     }
 };

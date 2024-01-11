@@ -19,6 +19,7 @@ const logoutRouter = require("./routes/logout");
 const dashboardRouter = require("./routes/dashboard");
 const profileRouter = require("./routes/profile");
 const userPageRouter = require("./routes/user-page");
+const contactUsRouter = require("./routes/contact-us");
 
 const app = express();
 
@@ -65,6 +66,7 @@ app.use("/logout", logoutRouter);
 app.use("/dashboard", dashboardRouter);
 app.use("/profile", profileRouter);
 app.use("/userPage", userPageRouter);
+app.use("/contact", contactUsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
