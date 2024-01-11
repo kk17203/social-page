@@ -6,7 +6,10 @@ Social Page is a social media web application built with Node.js, Express, and M
 
 -   User authentication
 -   Profile creation
+-   Profile picture selection
 -   Posting messages
+-   Liking posts
+-   Commenting on posts
 -   Following other users
 -   Contact form
 
