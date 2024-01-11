@@ -22,6 +22,10 @@ router.get(
             user: req.user,
             posts: posts,
             currentPage: "/dashboard",
+            anchorInfo: {
+                elementId: "headerDropDownBtn",
+                anchorSide: "bottom",
+            },
         });
     })
 );

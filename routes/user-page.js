@@ -43,28 +43,6 @@ router.get(
 );
 
 // POST for follow request
-// router.post(
-//     "/followUser",
-//     asyncHandler(async (req, res, next) => {
-//         const currentUser = req.user;
-//         const userToFollow = req.body.userToFollow;
-
-//         // Check if already followed in array
-//         if (!currentUser.followed.includes(userToFollow)) {
-//             // Add user to followed array
-//             currentUser.followed.push(userToFollow);
-//             await currentUser.save();
-//         } else if (currentUser.followed.includes(userToFollow)) {
-//             const followedUserIndex =
-//                 currentUser.followed.indexOf(userToFollow);
-//             currentUser.followed.splice(followedUserIndex, 1);
-//             await currentUser.save();
-//         }
-//         res.redirect(`/userPage/${userToFollow}`);
-//     })
-// );
-
-// POST for follow request
 router.post(
     "/followUser",
     asyncHandler(async (req, res, next) => {
