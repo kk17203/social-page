@@ -25,12 +25,7 @@
                     <div class="login-inputs">
                         <label for="name"
                             >Your Name:
-                            <input
-                                type="text"
-                                placeholder="Name"
-                                name="name"
-                                required
-                            />
+                            <input type="text" placeholder="Name" name="name" />
                         </label>
 
                         <label for="email"
@@ -49,7 +44,6 @@
                                 placeholder="Website Feedback is Welcome!"
                                 cols="30"
                                 rows="10"
-                                required
                             ></textarea>
                         </label>
                         <input
@@ -75,12 +69,12 @@
             </div>
             <% if(typeof successMessage !== 'undefined' && successMessage) { %>
             <div class="contact-container">
-                <p>Email Sent Successfully!</p>
+                <p><%= successMessage %></p>
             </div>
             <% } else if(typeof errorMessage !== 'undefined' && errorMessage) {
             %>
             <div class="contact-container">
-                <p>Error Sending Email</p>
+                <p><%= errorMessage %></p>
             </div>
             <% } %>
         </div>

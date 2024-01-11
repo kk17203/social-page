@@ -24,10 +24,20 @@ router.get(
             return res.redirect("/");
         }
 
+        const successMessage = req.flash("successMessage");
+        const errorMessage = req.flash("errorMessage");
+
+        // Clear the flash messages after declaring to prevent render on next load
+        req.flash("successMessage", null);
+        req.flash("errorMessage", null);
+
         res.render("contactUs", {
             title: "Contact Us",
             user: req.user,
             currentPage: "/contact",
+            // If the flash message is 0, return null.
+            successMessage: successMessage.length > 0 ? successMessage : null,
+            errorMessage: errorMessage.length > 0 ? errorMessage : null,
         });
     })
 );
@@ -44,12 +54,8 @@ router.post(
             console.log(
                 "Tried to send blank email. ---------------------------------------------------------------------------"
             );
-            return res.render("contactUs", {
-                title: "Contact Us",
-                user: req.user,
-                currentPage: "/contact",
-                errorMessage: "Please provide name, email, and message.",
-            });
+            req.flash("errorMessage", "Please provide name and message");
+            return res.redirect("/contact");
         }
 
         const mailOptions = {
@@ -75,25 +81,12 @@ router.post(
             console.log(
                 "Email has been sent!--------------------------------------------------------------------------------"
             );
-            // Make sure user is logged in
-            if (!req.user) {
-                return res.redirect("/");
-            }
-
-            res.redirect("/");
+            req.flash("successMessage", "Email has been sent!");
+            return res.redirect("/contact");
         } catch (error) {
             console.error(error);
-            // Make sure user is logged in
-            if (!req.user) {
-                return res.redirect("/");
-            }
-
-            res.render("contactUs", {
-                title: "Contact Us",
-                user: req.user,
-                currentPage: "/contact",
-                errorMessage: "Error sending email.",
-            });
+            req.flash("errorMessage", "Error Sending Email");
+            res.redirect("/contact");
         }
     })
 );
