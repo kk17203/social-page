@@ -1,4 +1,4 @@
-const moment = require("moment");
+const moment = require("moment-timezone");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -24,15 +24,13 @@ const PostSchema = new Schema({
 
 // Virtual field for formatted timestamp
 PostSchema.virtual("formattedTimestamp").get(function () {
-    // Format the date using Intl.DateTimeFormat
-    const formattedDate = new Intl.DateTimeFormat("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-    }).format(this.timestamp);
+    // Define timezone
+    const timeZone = "America/Chicago";
+
+    //Format the date with specific options and time zone
+    const formattedDate = moment(this.timestamp)
+        .tz(timeZone)
+        .format("MMM D, YYYY [at] h:mm A");
 
     return formattedDate;
 });
