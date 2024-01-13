@@ -36,6 +36,10 @@
     padding: 10px;
 }
 
+.post-image {
+    width: 130px;
+}
+
 .post-footer {
     padding: 10px;
     /* border-top: 1px solid #ccc; */
@@ -226,6 +230,34 @@
 
 .post-form button:active {
     box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
+}
+
+.input-file-label {
+    padding: 10px;
+    background-color: #cccccc23;
+    border-radius: 10px;
+    border: none;
+    color: green;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 3px;
+}
+
+.input-file-label:hover {
+    background-color: #cccccc4f;
+}
+
+.input-file-label:active {
+    box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
+}
+
+.input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
 
 /* PROFILE */

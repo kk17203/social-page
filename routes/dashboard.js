@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const Post = require("../models/posts");
+const multer = require("multer");
+const sharp = require("sharp");
+const path = require("path");
 
 /* GET home page. */
 router.get(
@@ -30,13 +33,48 @@ router.get(
     })
 );
 
+// Set up multer storage for image uploads
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const uploadDir = path.join(__dirname, "../public/images/uploads");
+        cb(null, uploadDir); // Specify the upload directory
+    },
+    filename: function (req, file, cb) {
+        // Rename the file to avoid conflicts
+        const uniqueSuffix = Date.now();
+        cb(null, file.fieldname + "-" + uniqueSuffix);
+    },
+});
+
+// Set up Multer config with security measures
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // Limit the file size to 5 MB
+    fileFilter: (req, file, cb) => {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            console.log("Please upload a valid image file");
+            return cb(new Error("Please upload a valid image file"));
+        }
+        cb(undefined, true);
+    },
+});
+
 // POST for posts
 router.post(
     "/",
+    upload.single("image"), // Handle single upload
     asyncHandler(async (req, res, next) => {
+        console.log(req.file);
+
+        const relativePath = req.file.path.replace(
+            /.*\/public\/images\//,
+            "/images/"
+        );
+
         const newPost = new Post({
             author: req.user._id,
             post: req.body.post,
+            image: req.file ? relativePath : null,
         });
 
         // Save the new Post to DB

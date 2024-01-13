@@ -23,7 +23,11 @@
                             alt="Profile Pic"
                         />
                         <div class="post-form">
-                            <form action="" method="POST">
+                            <form
+                                action=""
+                                method="POST"
+                                enctype="multipart/form-data"
+                            >
                                 <label for="post"></label>
                                 <textarea
                                     name="post"
@@ -33,6 +37,17 @@
                                     placeholder="Write a new post"
                                     required
                                 ></textarea>
+                                <label for="image" class="input-file-label">
+                                    Add Img</label
+                                >
+                                <input
+                                    type="file"
+                                    name="image"
+                                    accept="image/*"
+                                    id="image"
+                                    class="input-file"
+                                />
+
                                 <button type="submit">Post</button>
                             </form>
                         </div>
@@ -66,6 +81,13 @@
                     </div>
                     <div class="post-body">
                         <p><%= post.post %></p>
+                        <% if (post.image) { %>
+                        <img
+                            src="<%= post.image %>"
+                            alt="image"
+                            class="post-image"
+                        />
+                        <% } %>
                         <div class="likes-comments-counter">
                             <p>
                                 <%= post.likes.length %> likes -

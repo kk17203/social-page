@@ -1,7 +1,7 @@
 const moment = require("moment-timezone");
 const mongoose = require("mongoose");
 // const multer = require("multer");
-// const fileType = require("file-type");
+// const sharp = require("sharp");
 
 const Schema = mongoose.Schema;
 
@@ -20,6 +20,7 @@ const PostSchema = new Schema({
     author: { type: Schema.Types.ObjectId, ref: "User" },
     post: { type: String, required: true },
     comments: [CommentSchema],
+    image: { type: String },
     likes: [{ type: Schema.Types.ObjectId, ref: "Users" }], // Array of ref to users who like the post
     timestamp: { type: Date, default: Date.now },
 });
