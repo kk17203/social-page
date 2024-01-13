@@ -143,6 +143,14 @@
                     </div>
                     <div class="post-body">
                         <p><%= post.post %></p>
+                        <% if (post.image) { %>
+                        <img
+                            src="<%= post.image %>"
+                            alt="image"
+                            class="post-image"
+                        />
+                        <% } %>
+
                         <div class="likes-comments-counter">
                             <p>
                                 <%= post.likes.length %> likes -
