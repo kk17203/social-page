@@ -28,6 +28,10 @@ router.post(
 
             // Make username all lowercase and take out any spaces. Including leading and trailing
             const processedUsername = username.toLowerCase().trim();
+            const processedEmail = email.trim();
+            const processedPhone = phone.trim();
+            const processedFirstName = first_name.trim();
+            const processedLastName = last_name.trim();
 
             // Hash and Salt password before save
             const saltRounds = 10;
@@ -37,10 +41,10 @@ router.post(
             const newUser = new User({
                 username: processedUsername,
                 password: hashedPassword, // Save the hash password
-                email,
-                phone,
-                first_name,
-                last_name,
+                email: processedEmail,
+                phone: processedPhone,
+                first_name: processedFirstName,
+                last_name: processedLastName,
                 profile_picture: profilePicture,
                 loginHistory: {
                     timestamp: new Date(),
