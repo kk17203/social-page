@@ -26,13 +26,16 @@ router.post(
                 profilePicture,
             } = req.body;
 
+            // Make username all lowercase and take out any spaces. Including leading and trailing
+            const processedUsername = username.toLowerCase().trim();
+
             // Hash and Salt password before save
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);
 
             //Create a new user with User model
             const newUser = new User({
-                username,
+                username: processedUsername,
                 password: hashedPassword, // Save the hash password
                 email,
                 phone,

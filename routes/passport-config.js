@@ -7,8 +7,12 @@ module.exports = function (passport) {
         new LocalStrategy(
             { passReqToCallback: true },
             async (req, username, password, done) => {
+                const processedUsername = username.toLowerCase().trim();
+
                 try {
-                    const user = await User.findOne({ username: username });
+                    const user = await User.findOne({
+                        username: processedUsername,
+                    });
                     if (!user) {
                         return done(null, false, {
                             message: "Incorrect username",
