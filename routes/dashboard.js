@@ -51,7 +51,7 @@ const upload = multer({
     storage: storage,
     limits: { fileSize: 5 * 1024 * 1024 }, // Limit the file size to 5 MB
     fileFilter: (req, file, cb) => {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
             console.log("Please upload a valid image file");
             return cb(new Error("Please upload a valid image file"));
         }
@@ -64,17 +64,12 @@ router.post(
     "/",
     upload.single("image"), // Handle single upload
     asyncHandler(async (req, res, next) => {
-        console.log(req.file);
-
-        const relativePath = req.file.path.replace(
-            /.*\/public\/images\//,
-            "/images/"
-        );
-
         const newPost = new Post({
             author: req.user._id,
             post: req.body.post,
-            image: req.file ? relativePath : null,
+            image: req.file
+                ? req.file.path.replace(/.*\/public\/images\//, "/images/")
+                : null,
         });
 
         // Save the new Post to DB
