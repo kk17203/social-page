@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+        <link rel="stylesheet" href="/stylesheets/header.css" />
+        <link rel="stylesheet" href="/stylesheets/popup.css" />
+
+        <script
+            src="https://kit.fontawesome.com/008151671d.js"
+            crossorigin="anonymous"
+        ></script>
+
+        <title>Document</title>
+    </head>
+    <body>
+        <div><%- include('header') %></div>
+        <div class="main-login">
+            <div class="features-container">
+                <h1>Features</h1>
+                <div class="features-greeting">
+                    <p>Thank you for visiting my site!</p>
+                    <p>A few background features to make you aware of:</p>
+                </div>
+                <div class="features-list">
+                    <ul>
+                        <li>
+                            <strong>Bcryptjs</strong
+                            ><em> for password hashing and salting</em>
+                        </li>
+                        <li>
+                            <strong>Passport-local</strong>
+                            <em>for authentication</em>
+                        </li>
+                        <li>
+                            <strong>Google Cloud Storage</strong
+                            ><em> for file uploads</em>
+                        </li>
+                        <li>
+                            <strong>MongoDB</strong
+                            ><em> for document storage</em>
+                        </li>
+                        <li>
+                            <strong>Nodemailer</strong>
+                            <em> for emailing services</em>
+                        </li>
+                    </ul>
+                </div>
+                <a class="features-button" href="/">Continue to Dashboard</a>
+            </div>
+            <% if(typeof successMessage !== 'undefined' && successMessage) { %>
+            <div class="contact-container">
+                <p><%= successMessage %></p>
+            </div>
+            <% } else if(typeof errorMessage !== 'undefined' && errorMessage) {
+            %>
+            <div class="contact-container">
+                <p><%= errorMessage %></p>
+            </div>
+            <% } %>
+        </div>
+    </body>
+</html>

@@ -248,3 +248,56 @@ body {
     margin-bottom: 10px;
     text-decoration: underline;
 }
+
+/* Features page  */
+.features-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 1px solid green;
+    width: 400px;
+    padding: 20px;
+}
+
+.features-container h1 {
+    margin-bottom: 0;
+    border-bottom: 3px solid green;
+}
+
+.features-greeting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.features-greeting p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.features-list strong {
+    color: green;
+}
+
+.features-button {
+    padding: 10px;
+    color: rgb(90, 90, 90);
+    border-radius: 10px;
+    border: 0.2px solid rgba(0, 128, 0, 0.459);
+    background-color: rgba(0, 128, 0, 0.138);
+    cursor: pointer;
+    margin: 10px;
+    text-decoration: none;
+}
+
+.features-button:hover {
+    background-color: #cccccc4f;
+}
+
+.features-button:active {
+    box-shadow: inset 0 0 7px rgba(0, 128, 0, 0.274);
+}

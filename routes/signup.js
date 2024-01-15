@@ -60,7 +60,7 @@ router.post(
                 if (err) {
                     return next(err);
                 }
-                res.redirect("/");
+                res.redirect("/features");
             });
         }
     })
