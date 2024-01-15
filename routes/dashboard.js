@@ -34,10 +34,20 @@ router.get(
     })
 );
 
+// Google Cloud Storage key as a JSON object
+const keyFileContent = {
+    type: process.env.FILE_TYPE,
+    project_id: process.env.GOOGLE_PROJECT_ID,
+    private_key_id: process.env.FILE_PRIVATE_KEY_ID,
+    private_key: process.env.FILE_PRIVATE_KEY,
+    client_email: process.env.FILE_CLIENT_EMAIL,
+    client_id: process.env.FILE_CLIENT_ID,
+};
+
 // Initialize google cloud storage
 const storage = new Storage({
     projectId: process.env.GOOGLE_PROJECT_ID,
-    keyFilename: process.env.GOOGLE_KEY_PATH,
+    credentials: keyFileContent,
 });
 
 const bucket = storage.bucket(process.env.GOOGLE_BUCKET);
@@ -68,6 +78,15 @@ router.post(
 
             if (!file) {
                 console.log("No file provided");
+                const newPost = new Post({
+                    author: req.user._id,
+                    post: req.body.post,
+                    image: null,
+                });
+
+                // Save the new Post to DB
+                await newPost.save();
+
                 return res.redirect("/dashboard");
             }
 
