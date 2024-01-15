@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/stylesheets/style.css" />
+        <link rel="stylesheet" href="/stylesheets/dashboard.css" />
+        <link rel="stylesheet" href="/stylesheets/header.css" />
+        <link rel="stylesheet" href="/stylesheets/popup.css" />
+
+        <script
+            src="https://kit.fontawesome.com/008151671d.js"
+            crossorigin="anonymous"
+        ></script>
+
+        <title><%= title %></title>
+    </head>
+    <body>
+        <div><%- include('header') %></div>
+        <div class="main-login">
+            <div class="features-container">
+                <h1><%= title %></h1>
+                <div class="features-greeting">
+                    <p>
+                        Polk County Cycling Club exists to grow all types of
+                        cycling in the Ozarks, plan group rides, and support the
+                        community.
+                    </p>
+                </div>
+                <a class="features-button" href="/contact">Contact Us</a>
+            </div>
+            <% if(typeof successMessage !== 'undefined' && successMessage) { %>
+            <div class="contact-container">
+                <p><%= successMessage %></p>
+            </div>
+            <% } else if(typeof errorMessage !== 'undefined' && errorMessage) {
+            %>
+            <div class="contact-container">
+                <p><%= errorMessage %></p>
+            </div>
+            <% } %>
+        </div>
+    </body>
+</html>

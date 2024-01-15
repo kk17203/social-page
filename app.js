@@ -24,6 +24,7 @@ const userPageRouter = require("./routes/user-page");
 const contactUsRouter = require("./routes/contact-us");
 const adminPageRouter = require("./routes/admin-page");
 const featuresRouter = require("./routes/features");
+const aboutRouter = require("./routes/about-us");
 
 const app = express();
 
@@ -92,6 +93,7 @@ app.use("/userPage", userPageRouter);
 app.use("/contact", contactUsRouter);
 app.use("/admin", adminPageRouter);
 app.use("/features", featuresRouter);
+app.use("/about", aboutRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
