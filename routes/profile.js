@@ -5,6 +5,8 @@ const Post = require("../models/posts");
 const User = require("../models/users");
 const path = require("path");
 const multer = require("multer");
+const { Storage } = require("@google-cloud/storage");
+const { v4: uuidv4 } = require("uuid");
 
 /* GET home page. */
 router.get(
@@ -61,22 +63,20 @@ router.post(
     })
 );
 
-// Set up multer storage for image uploads
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const uploadDir = path.join(__dirname, "../public/images/uploads");
-        cb(null, uploadDir); // Specify the upload directory
-    },
-    filename: function (req, file, cb) {
-        // Rename the file to avoid conflicts
-        const uniqueSuffix = Date.now();
-        cb(null, file.fieldname + "-" + uniqueSuffix);
-    },
+// Initialize google cloud storage
+const storage = new Storage({
+    projectId: process.env.GOOGLE_PROJECT_ID,
+    keyFilename: process.env.GOOGLE_KEY_PATH,
 });
 
-// Set up Multer config with security measures
+const bucket = storage.bucket(process.env.GOOGLE_BUCKET);
+
+// Set up Multer storage for image uploads
+const multerStorage = multer.memoryStorage();
+
+// Set up Multer config with Google Cloud Storage
 const upload = multer({
-    storage: storage,
+    storage: multerStorage,
     limits: { fileSize: 5 * 1024 * 1024 }, // Limit the file size to 5 MB
     fileFilter: (req, file, cb) => {
         if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
@@ -92,17 +92,46 @@ router.post(
     "/posts",
     upload.single("image"),
     asyncHandler(async (req, res, next) => {
-        const newPost = new Post({
-            author: req.user._id,
-            post: req.body.post,
-            image: req.file
-                ? req.file.path.replace(/.*\/public\/images\//, "/images/")
-                : null,
-        });
+        try {
+            const file = req.file;
 
-        // Save the new Post to DB
-        await newPost.save();
-        res.redirect("/profile");
+            if (!file) {
+                console.log("No file provided");
+                return res.redirect("/dashboard");
+            }
+
+            const fileName = `${uuidv4()}-${file.originalname}`;
+            const blob = bucket.file(fileName);
+
+            const blobStream = blob.createWriteStream({
+                metadata: {
+                    contentType: file.mimetype,
+                },
+            });
+
+            blobStream.on("error", (err) => {
+                console.error(err);
+                res.status(500).json({ error: "Failed to upload file" });
+            });
+
+            blobStream.on("finish", async () => {
+                const imageUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
+
+                const newPost = new Post({
+                    author: req.user._id,
+                    post: req.body.post,
+                    image: imageUrl,
+                });
+
+                // Save the new Post to DB
+                await newPost.save();
+                res.redirect("/profile");
+            });
+            blobStream.end(file.buffer);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
     })
 );
 
