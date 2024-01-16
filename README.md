@@ -1,6 +1,8 @@
 # Social Page
 
-Social Page is a social media web application built with Node.js, Express, and MongoDB.
+Social Page is a social media web application built with Node.js, Express, MongoDB, and Google Cloud Storage.
+
+View it live at https://poco-cycling.up.railway.app/
 
 ## Features
 
