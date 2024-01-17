@@ -45,8 +45,33 @@
                     <button class="login-button" type="submit">Log In</button>
                 </form>
             </div>
+
+            <form action="" method="POST">
+                <label for="username">
+                    <input
+                        type="hidden"
+                        id="username"
+                        name="username"
+                        value="employer"
+                    />
+                </label>
+                <label for="password">
+                    <input
+                        type="hidden"
+                        name="password"
+                        id="password"
+                        value="password"
+                    />
+                </label>
+                <button type="submit" class="guest-login-container">
+                    <h3>
+                        Future Employer<br />
+                        Log In
+                    </h3>
+                </button>
+            </form>
             <a href="/signup" class="signup-link">
-                <div class="login-container">
+                <div class="signup-link-container">
                     <h3>Sign Up</h3>
                 </div>
             </a>

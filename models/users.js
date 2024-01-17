@@ -68,6 +68,17 @@ UserSchema.virtual("formattedLastLogin").get(function () {
     }
 });
 
+// Virtual for last login ip address
+UserSchema.virtual("formattedLastLoginIp").get(function () {
+    if (this.loginHistory.length > 0) {
+        const lastLogin = this.loginHistory[this.loginHistory.length - 1];
+
+        return lastLogin.ipAddress;
+    } else {
+        return "No login history available.";
+    }
+});
+
 // Virtual for formatted phone number
 UserSchema.virtual("formattedPhone").get(function () {
     // Remove non-numeric characters from the phone number
