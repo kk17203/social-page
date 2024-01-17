@@ -21,7 +21,52 @@
     </head>
     <body>
         <!-- HEADER -->
-        <div><%- include('header') %></div>
+        <div class="global-header">
+            <div class="global-nav-bar">
+                <a href="/dashboard">
+                    <img class="logo" src="/images/POCO_With.png" alt="logo" />
+                </a>
+                <div class="global-nav">
+                    <a
+                        href="/dashboard"
+                        class="<%= currentPage === '/dashboard' ? 'active' : '' %>"
+                        >Dashboard</a
+                    >
+                    <a
+                        href="/profile"
+                        class="<%= currentPage === '/profile' ? 'active' : '' %>"
+                        >Profile Page</a
+                    >
+                    <a
+                        href="/users"
+                        class="<%= currentPage === '/users' ? 'active' : '' %>"
+                        >Users</a
+                    >
+                </div>
+                <div class="user-nav">
+                    <img
+                        src="<%= currentUser.profile_picture %>"
+                        alt="Profile Pic"
+                        class="profile-pic"
+                    />
+                    <button class="header-drop-down-btn" id="headerDropDownBtn">
+                        <i class="fa-solid fa-caret-down"></i>
+                    </button>
+                    <div class="header-drop-down">
+                        <div class="drop-down-content">
+                            <a href="/about" class="drop-down-links"
+                                >About Us</a
+                            >
+                            <a href="/contact" class="drop-down-links"
+                                >Contact Us</a
+                            >
+                            <a href="/logout" class="logout-link">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- MAIN  -->
         <div class="main">
             <div class="sidebar">
