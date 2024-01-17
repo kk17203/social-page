@@ -25,6 +25,9 @@
         <div class="main-signup">
             <div class="signup-container">
                 <h1>Sign Up For Free</h1>
+                <% if(message) { %>
+                <p class="username-exists"><%= message %></p>
+                <% } %>
                 <div class="signup-form">
                     <form action="" method="POST">
                         <div class="text-input">

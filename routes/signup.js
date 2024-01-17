@@ -6,7 +6,9 @@ const bcrypt = require("bcryptjs");
 
 // GET login page
 router.get("/", (req, res, next) => {
-    res.render("signup");
+    res.render("signup", {
+        message: "",
+    });
 });
 
 // POST for sign-up form
@@ -33,6 +35,14 @@ router.post(
             const processedFirstName = first_name.trim();
             const processedLastName = last_name.trim();
 
+            const existingUser = await User.findOne({
+                username: processedUsername,
+            });
+            if (existingUser) {
+                return res.render("signup", {
+                    message: "Username already exists. Please choose another",
+                });
+            }
             // Hash and Salt password before save
             const saltRounds = 10;
             const hashedPassword = await bcrypt.hash(password, saltRounds);

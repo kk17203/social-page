@@ -67,6 +67,10 @@ body {
     color: green;
 }
 
+.username-exists {
+    color: red;
+}
+
 .signup-link-container:hover {
     background-color: rgba(0, 128, 0, 0.138);
 }
