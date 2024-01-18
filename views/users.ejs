@@ -12,6 +12,7 @@
             src="https://kit.fontawesome.com/008151671d.js"
             crossorigin="anonymous"
         ></script>
+        <script src="/javascripts/script.js" defer></script>
 
         <title><% title %></title>
     </head>
@@ -19,7 +20,7 @@
         <div><%- include('header') %></div>
         <div class="main">
             <div class="all-users">
-                <% if(users) { %> <% users.forEach(function(user) { %> <%
+                <% if(users) { %> <% users.forEach(function(user, index) { %> <%
                 if(currentUser._id.toString() !== user._id.toString()) { %>
                 <div class="user-container">
                     <div class="user-link">
@@ -40,15 +41,20 @@
                                 </p>
                             </div>
                             <div class="users-list-follow-form">
-                                <form action="" method="POST">
+                                <form
+                                    action=""
+                                    method="POST"
+                                    id="followForm<%= index %>"
+                                >
                                     <input
                                         type="hidden"
                                         name="userToFollow"
                                         value="<%=user._id%>"
                                     />
                                     <button
+                                        id="followButton<%= index %>"
                                         class="<%= !currentUser.followed.includes(user._id) ? 'follow-button' : 'unfollow-button' %>"
-                                        type="submit"
+                                        onclick="submitFollow(event, '<%=index%>')"
                                     >
                                         <%=
                                         !currentUser.followed.includes(user._id)

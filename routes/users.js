@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const User = require("../models/users");
+const multer = require("multer");
+const multerUpload = multer();
 
 /* GET home page. */
 router.get(
@@ -27,6 +29,7 @@ router.get(
 // POST for follow request
 router.post(
     "/",
+    multerUpload.none(),
     asyncHandler(async (req, res, next) => {
         const currentUser = req.user; // returns whole user
         const currentUserId = req.user._id;
@@ -53,7 +56,7 @@ router.post(
             userToFollow.followers.splice(currentUserIndex, 1);
             await Promise.all([currentUser.save(), userToFollow.save()]);
         }
-        res.redirect("/users");
+        res.status(204).end();
     })
 );
 

@@ -163,7 +163,6 @@ router.post(
         const currentUser = req.user._id; // define current users id
 
         const post = await Post.findById(postId); // find the actual post that matches the postId provided by form
-
         // Check if current user already liked post
         if (!post.likes.includes(currentUser)) {
             // Add user to likes array

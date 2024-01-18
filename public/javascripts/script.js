@@ -32,21 +32,39 @@ function submitLikeForm(event, index) {
         });
 }
 
-// File Selection on post
-document.getElementById("image").addEventListener("change", function () {
-    const label = document.getElementById("fileLabel");
+// Follow submit
+function submitFollow(event, index) {
+    event.preventDefault();
 
-    if (this.files && this.files.length > 0) {
-        // A file was selected, change the label style
-        label.style.backgroundColor = "lightgray";
-        // Change the label text to the first 6 characters of the file name
-        label.textContent = this.files[0].name.substring(0, 8);
-    } else {
-        // No file was selected, reset the label style
-        label.style.backgroundColor = "#cccccc23";
-        label.textContent = "Add Img";
-    }
-});
+    const followButton = document.getElementById(`followButton${index}`);
+    const followForm = document.getElementById(`followForm${index}`);
+    const formData = new FormData(followForm);
+
+    const style = followButton.classList.contains("follow-button")
+        ? "unfollow-button"
+        : "follow-button";
+    followButton.classList.replace(followButton.classList.item(0), style);
+
+    // Toggle button text. If style is 'follow-button' then text content is 'Follow'
+    followButton.textContent =
+        style === "follow-button" ? "Follow" : "Unfollow";
+
+    fetch("/users/", {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+        })
+        .catch((error) => {
+            console.error(
+                "There has been a problem with your fetch operation:",
+                error
+            );
+        });
+}
 
 function openCommentsForm(index) {
     // Find commentsForm div using passed index
