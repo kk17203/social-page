@@ -33,13 +33,21 @@ function submitLikeForm(event, index) {
 }
 
 // Follow submit
-function submitFollow(event, index) {
+function submitFollow(
+    event,
+    index,
+    userId,
+    userName,
+    userUsername,
+    userProfilePic
+) {
     event.preventDefault();
 
     const followButton = document.getElementById(`followButton${index}`);
     const followForm = document.getElementById(`followForm${index}`);
     const formData = new FormData(followForm);
     const followerCount = document.getElementById("followerCount");
+    const allUsersPopup = document.getElementById("allUsersPopup");
 
     const style = followButton.classList.contains("follow-button")
         ? "unfollow-button"
@@ -55,6 +63,43 @@ function submitFollow(event, index) {
             style === "follow-button"
                 ? parseInt(followerCount.textContent, 10) - 1
                 : parseInt(followerCount.textContent, 10) + 1;
+    }
+
+    // Get the user container for the current user
+    const userContainer = document.getElementById(`userContainer${userId}`);
+
+    if (style === "follow-button") {
+        // If the user is currently following, remove the user container
+        if (userContainer) {
+            userContainer.remove();
+        }
+    } else {
+        // If the user is not currently following, add a new user container
+        const newUserContainer = document.createElement("div");
+        newUserContainer.classList.add("user-container");
+        newUserContainer.id = `userContainer${userId}`;
+
+        // Add user details to the new user container
+        newUserContainer.innerHTML = `
+            <div class="user-link">
+                <a href="/userPage/${userId}">
+                    <img src="${userProfilePic}" alt="Profile Pic" class="profile-pic" />
+                </a>
+            </div>
+            <div class="user-info-form-container">
+                <div class="user-list-info-and-form">
+                    <div class="users-list-info">
+                        <p class="users-list-name">${userName}</p>
+                        <p class="users-list-username">${userUsername}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Add the new user container to the modal
+        if (allUsersPopup) {
+            allUsersPopup.appendChild(newUserContainer);
+        }
     }
 
     fetch("/users/", {

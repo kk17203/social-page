@@ -14,8 +14,6 @@
         ></script>
         <script src="/javascripts/popup.js" defer></script>
         <script src="/javascripts/script.js" defer></script>
-        <script src="/javascripts/followersPopUp.js" defer></script>
-        <script src="/javascripts/followingPopUp.js" defer></script>
 
         <title><%= title %></title>
     </head>
@@ -142,7 +140,7 @@
                         />
                         <button
                             class="<%= !currentUser.followed.includes(user._id) ? 'follow-button' : 'unfollow-button' %>"
-                            onclick="submitFollow(event, '0')"
+                            onclick="submitFollow(event, '0','<%=currentUser._id%>', '<%=currentUser.name%>', '<%=currentUser.username%>', '<%=currentUser.profile_picture%>')"
                             id="followButton0"
                         >
                             <%= !currentUser.followed.includes(user._id) ?

@@ -1,9 +1,11 @@
+<script src="/javascripts/followersPopUp.js" defer></script>
+
 <div id="followersPopUp" class="modal">
     <div class="followers-popup-content">
-        <div class="all-users-popup">
+        <div class="all-users-popup" id="allUsersPopup">
             <% if(followers.length > 0 ) { %> <%
             followers.forEach(function(follower) { %>
-            <div class="user-container">
+            <div class="user-container" id="userContainer<%= follower._id%>">
                 <div class="user-link">
                     <a href="/userPage/<%= follower._id %>">
                         <img
