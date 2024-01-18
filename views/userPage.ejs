@@ -132,16 +132,13 @@
                             name="userToFollow"
                             value="<%=user._id%>"
                         />
-
-                        <% if(!currentUser.followed.includes(user._id)) { %>
-                        <button class="follow-button" type="submit">
-                            Follow
+                        <button
+                            class="<%= !currentUser.followed.includes(user._id) ? 'follow-button' : 'unfollow-button' %>"
+                            type="submit"
+                        >
+                            <%= !currentUser.followed.includes(user._id) ?
+                            'Follow' : 'Unfollow' %>
                         </button>
-                        <% } else { %>
-                        <button class="unfollow-button" type="submit">
-                            Unfollow
-                        </button>
-                        <% } %>
                     </form>
                     <% } %>
 
@@ -150,7 +147,7 @@
                             <p class="profile-label"><%=user.email%></p>
                             <p class="profile-label-lite">Email</p>
                         </div>
-                        <% if(user.phone.length > 10) { %>
+                        <% if(user.phone) { %>
                         <div class="profile-phone">
                             <p class="profile-label">
                                 <%= user.formattedPhone %>

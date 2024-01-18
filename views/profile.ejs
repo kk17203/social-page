@@ -82,7 +82,7 @@
                             <p class="profile-label"><%=user.email%></p>
                             <p class="profile-label-lite">Email</p>
                         </div>
-                        <% if(user.phone.length > 10) { %>
+                        <% if(user.phone) { %>
                         <div class="profile-phone">
                             <p class="profile-label">
                                 <%= user.formattedPhone %>
