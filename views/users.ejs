@@ -46,21 +46,14 @@
                                         name="userToFollow"
                                         value="<%=user._id%>"
                                     />
-
-                                    <%
-                                    if(!currentUser.followed.includes(user._id))
-                                    { %>
-                                    <button class="follow-button" type="submit">
-                                        Follow
-                                    </button>
-                                    <% } else { %>
                                     <button
-                                        class="unfollow-button"
+                                        class="<%= !currentUser.followed.includes(user._id) ? 'follow-button' : 'unfollow-button' %>"
                                         type="submit"
                                     >
-                                        Unfollow
+                                        <%=
+                                        !currentUser.followed.includes(user._id)
+                                        ? 'Follow' : 'Unfollow' %>
                                     </button>
-                                    <% } %>
                                 </form>
                             </div>
                         </div>
