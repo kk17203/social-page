@@ -29,7 +29,8 @@ router.get(
             .populate("comments.author")
             .sort({ timestamp: -1 })
             .populate("author"); // Find all Posts and Populate the 'author' field in the 'posts' array
-        console.log(user);
+        console.log(user._id.toString());
+        console.log(req.user._id.toString());
         res.render("userPage", {
             title: "User Page",
             user: user,

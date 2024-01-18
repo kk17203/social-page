@@ -124,6 +124,8 @@
                         <% } %>
                     </div>
 
+                    <% if(currentUser._id.toString() !== user._id.toString()) {
+                    %>
                     <form action="/userPage/followUser" method="POST">
                         <input
                             type="hidden"
@@ -141,6 +143,7 @@
                         </button>
                         <% } %>
                     </form>
+                    <% } %>
 
                     <div class="profile-info">
                         <div class="profile-email">
