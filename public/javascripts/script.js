@@ -39,6 +39,7 @@ function submitFollow(event, index) {
     const followButton = document.getElementById(`followButton${index}`);
     const followForm = document.getElementById(`followForm${index}`);
     const formData = new FormData(followForm);
+    const followerCount = document.getElementById("followerCount");
 
     const style = followButton.classList.contains("follow-button")
         ? "unfollow-button"
@@ -48,6 +49,13 @@ function submitFollow(event, index) {
     // Toggle button text. If style is 'follow-button' then text content is 'Follow'
     followButton.textContent =
         style === "follow-button" ? "Follow" : "Unfollow";
+
+    if (followerCount) {
+        followerCount.textContent =
+            style === "follow-button"
+                ? parseInt(followerCount.textContent, 10) - 1
+                : parseInt(followerCount.textContent, 10) + 1;
+    }
 
     fetch("/users/", {
         method: "POST",
