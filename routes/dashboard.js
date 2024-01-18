@@ -158,7 +158,7 @@ router.post(
 router.post(
     "/likes",
     asyncHandler(async (req, res, next) => {
-        const postId = req.body.postId; // retrieve related postId from form (saves as a string)
+        const postId = req.body.postId; // retrieve related postId from form (saves as a string) Uses body parser
         const currentUser = req.user._id; // define current users id
 
         const post = await Post.findById(postId); // find the actual post that matches the postId provided by form
@@ -174,7 +174,9 @@ router.post(
             post.likes.splice(userIndex, 1); // Removes current user from likes array
             await post.save();
         }
-        res.redirect("/dashboard");
+
+        // Send a OK response to the client
+        res.status(204).end();
     })
 );
 

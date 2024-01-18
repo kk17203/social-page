@@ -1,7 +1,39 @@
-// Add event listener to 'like' icon to submit form
-function submitLikeForm(index) {
-    // Pass through index of post so we 'like' the correct post
-    document.getElementById(`likeForm${index}`).submit();
+function submitLikeForm(event, index) {
+    const likeIcon = document.getElementById(`likeIcon${index}`);
+    const likeForm = document.getElementById(`likeForm${index}`);
+
+    const postId = likeForm.elements.postId.value;
+
+    // Toggles class list
+    const style = likeIcon.classList.contains("fa-regular")
+        ? "fa-solid"
+        : "fa-regular";
+    likeIcon.classList.replace(likeIcon.classList.item(0), style); // Finds the first class and replaces it with style
+
+    // Prevent the form from being submitted normally
+    event.preventDefault();
+
+    // Send a POST request to the /likes route
+    fetch("/dashboard/likes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            postId: postId,
+        }),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+        })
+        .catch((error) => {
+            console.error(
+                "There has been a problem with your fetch operation:",
+                error
+            );
+        });
 }
 
 function openCommentsForm(index) {

@@ -109,20 +109,12 @@
                                         name="postId"
                                         value="<%= post._id %>"
                                     />
-                                    <% if(!post.likes.includes(user._id)) { %>
                                     <i
-                                        class="fa-regular fa-thumbs-up"
+                                        class="<%= post.likes.includes(user._id) ? 'fa-solid' : 'fa-regular' %> fa-thumbs-up"
                                         style="cursor: pointer"
-                                        onclick="submitLikeForm('<%=index%>')"
+                                        id="likeIcon<%=index%>"
+                                        onclick="submitLikeForm(event,'<%=index%>')"
                                     ></i>
-                                    <% } else { %>
-
-                                    <i
-                                        class="fa-solid fa-thumbs-up"
-                                        style="cursor: pointer"
-                                        onclick="submitLikeForm('<%=index%>')"
-                                    ></i>
-                                    <% } %>
                                 </form>
                                 <i
                                     id="iconReg<%= index %>"
