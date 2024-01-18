@@ -157,6 +157,7 @@ router.post(
 // POST for post likes
 router.post(
     "/likes",
+    upload.none(), // Multer middleware
     asyncHandler(async (req, res, next) => {
         const postId = req.body.postId; // retrieve related postId from form (saves as a string) Uses body parser
         const currentUser = req.user._id; // define current users id

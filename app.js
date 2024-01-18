@@ -14,6 +14,8 @@ require("./routes/passport-config")(passport); //Link to passport config file
 const compression = require("compression");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
+const multer = require("multer");
+const upload = multer();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");

@@ -201,9 +201,10 @@
                             </p>
                             <div class="post-footer-icons">
                                 <form
-                                    action="/userPage/likes"
+                                    action="/dashboard/likes"
                                     method="POST"
                                     id="likeForm<%= index %>"
+                                    enctype="multipart/form-data"
                                 >
                                     <input
                                         type="hidden"
@@ -221,21 +222,12 @@
                                         name="postId"
                                         value="<%= post._id %>"
                                     />
-                                    <% if(!post.likes.includes(currentUser._id))
-                                    { %>
                                     <i
-                                        class="fa-regular fa-thumbs-up"
+                                        class="<%= post.likes.includes(currentUser._id) ? 'fa-solid' : 'fa-regular' %> fa-thumbs-up"
                                         style="cursor: pointer"
-                                        onclick="submitLikeForm('<%=index%>')"
+                                        id="likeIcon<%=index%>"
+                                        onclick="submitLikeForm(event,'<%=index%>')"
                                     ></i>
-                                    <% } else { %>
-
-                                    <i
-                                        class="fa-solid fa-thumbs-up"
-                                        style="cursor: pointer"
-                                        onclick="submitLikeForm('<%=index%>')"
-                                    ></i>
-                                    <% } %>
                                 </form>
 
                                 <i

@@ -154,29 +154,30 @@ router.post(
     })
 );
 
+/// SEE SCRIPT.JS AND DASHBOARD.JS LIKES POST ///
 // POST for post likes
-router.post(
-    "/likes",
-    asyncHandler(async (req, res, next) => {
-        const postId = req.body.postId; // retrieve related postId from form (saves as a string)
-        const currentUser = req.user._id; // define current users id
+// router.post(
+//     "/likes",
+//     asyncHandler(async (req, res, next) => {
+//         const postId = req.body.postId; // retrieve related postId from form (saves as a string)
+//         const currentUser = req.user._id; // define current users id
 
-        const post = await Post.findById(postId); // find the actual post that matches the postId provided by form
+//         const post = await Post.findById(postId); // find the actual post that matches the postId provided by form
 
-        // Check if current user already liked post
-        if (!post.likes.includes(currentUser)) {
-            // Add user to likes array
-            post.likes.push(currentUser);
-            await post.save();
-        } else if (post.likes.includes(currentUser)) {
-            // If user has not already liked post.
-            const userIndex = post.likes.indexOf(currentUser); // Returns the index of current user in likes array
-            post.likes.splice(userIndex, 1); // Removes current user from likes array
-            await post.save();
-        }
-        res.redirect("/profile");
-    })
-);
+//         // Check if current user already liked post
+//         if (!post.likes.includes(currentUser)) {
+//             // Add user to likes array
+//             post.likes.push(currentUser);
+//             await post.save();
+//         } else if (post.likes.includes(currentUser)) {
+//             // If user has not already liked post.
+//             const userIndex = post.likes.indexOf(currentUser); // Returns the index of current user in likes array
+//             post.likes.splice(userIndex, 1); // Removes current user from likes array
+//             await post.save();
+//         }
+//         res.redirect("/profile");
+//     })
+// );
 
 // POST for comments form
 router.post(

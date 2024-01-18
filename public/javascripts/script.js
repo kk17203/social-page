@@ -2,7 +2,8 @@ function submitLikeForm(event, index) {
     const likeIcon = document.getElementById(`likeIcon${index}`);
     const likeForm = document.getElementById(`likeForm${index}`);
 
-    const postId = likeForm.elements.postId.value;
+    // Define formData from the likeForm's body
+    const formData = new FormData(likeForm);
 
     // Toggles class list
     const style = likeIcon.classList.contains("fa-regular")
@@ -16,12 +17,7 @@ function submitLikeForm(event, index) {
     // Send a POST request to the /likes route
     fetch("/dashboard/likes", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            postId: postId,
-        }),
+        body: formData,
     })
         .then((response) => {
             if (!response.ok) {
