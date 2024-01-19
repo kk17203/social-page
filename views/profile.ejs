@@ -171,12 +171,13 @@
                             class="post-image"
                         />
                         <% } %>
-
-                        <div class="likes-comments-counter">
-                            <p>
-                                <%= post.likes.length %> likes -
-                                <%=post.comments.length %> comments
-                            </p>
+                        <div class="likes-comment-form-container">
+                            <div class="likes-comments-counter">
+                                <p id="likesCount<%=index%>">
+                                    <%= post.likes.length %> likes -
+                                </p>
+                                <p><%=post.comments.length %> comments</p>
+                            </div>
                             <div class="post-footer-icons">
                                 <form
                                     action="/dashboard/likes"

@@ -23,6 +23,14 @@ function submitLikeForm(event, index) {
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
+            return response.json();
+        })
+        .then((data) => {
+            // Update the likes count in the DOM
+            const likesCount = document.getElementById(`likesCount${index}`);
+            if (likesCount) {
+                likesCount.textContent = `${data.likes} likes -`;
+            }
         })
         .catch((error) => {
             console.error(

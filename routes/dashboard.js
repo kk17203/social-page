@@ -175,8 +175,8 @@ router.post(
             await post.save();
         }
 
-        // Send a OK response to the client
-        res.status(204).end();
+        // Send a data back to client
+        res.json({ likes: post.likes.length });
     })
 );
 
