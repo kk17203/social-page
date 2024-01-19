@@ -20,15 +20,19 @@ function submitLikeForm(event, index) {
         body: formData,
     })
         .then((response) => {
+            // If response is not ok throw error
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
+            // If response is ok parse data as JSON
             return response.json();
         })
+        // Data should contain likes key passed from /dashboard/likes response
         .then((data) => {
             // Update the likes count in the DOM
             const likesCount = document.getElementById(`likesCount${index}`);
             if (likesCount) {
+                // If it found an element id matching likesCount(index)
                 likesCount.textContent = `${data.likes} likes -`;
             }
         })
