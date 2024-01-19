@@ -52,10 +52,6 @@ router.post(
         const userId = req.user._id;
         const selectedPic = req.body.profilePicture;
 
-        console.log(req.body);
-        console.log(userId);
-        console.log(selectedPic);
-
         await User.findByIdAndUpdate(userId, {
             profile_picture: selectedPic,
         });
@@ -109,6 +105,8 @@ router.post(
                 console.log("No file provided");
                 const newPost = new Post({
                     author: req.user._id,
+                    author_name: req.user.name,
+                    author_username: req.user.username,
                     post: req.body.post,
                     image: null,
                 });
@@ -138,6 +136,8 @@ router.post(
 
                 const newPost = new Post({
                     author: req.user._id,
+                    author_name: req.user.name,
+                    author_username: req.user.username,
                     post: req.body.post,
                     image: imageUrl,
                 });
@@ -153,31 +153,6 @@ router.post(
         }
     })
 );
-
-/// SEE SCRIPT.JS AND DASHBOARD.JS LIKES POST ///
-// POST for post likes
-// router.post(
-//     "/likes",
-//     asyncHandler(async (req, res, next) => {
-//         const postId = req.body.postId; // retrieve related postId from form (saves as a string)
-//         const currentUser = req.user._id; // define current users id
-
-//         const post = await Post.findById(postId); // find the actual post that matches the postId provided by form
-
-//         // Check if current user already liked post
-//         if (!post.likes.includes(currentUser)) {
-//             // Add user to likes array
-//             post.likes.push(currentUser);
-//             await post.save();
-//         } else if (post.likes.includes(currentUser)) {
-//             // If user has not already liked post.
-//             const userIndex = post.likes.indexOf(currentUser); // Returns the index of current user in likes array
-//             post.likes.splice(userIndex, 1); // Removes current user from likes array
-//             await post.save();
-//         }
-//         res.redirect("/profile");
-//     })
-// );
 
 // POST for comments form
 router.post(
@@ -196,6 +171,8 @@ router.post(
         // Create a new comment
         const newComment = {
             author: req.user._id,
+            author_name: req.user.name,
+            author_username: req.user.username,
             content: content,
         };
 

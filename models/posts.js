@@ -7,6 +7,8 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
     author: { type: Schema.Types.ObjectId, ref: "User" },
+    author_name: { type: String },
+    author_username: { type: String },
     content: { type: String },
     createdAt: { type: Date, default: Date.now },
 });
@@ -18,6 +20,8 @@ CommentSchema.virtual("formattedCreatedAt").get(function () {
 
 const PostSchema = new Schema({
     author: { type: Schema.Types.ObjectId, ref: "User" },
+    author_name: { type: String },
+    author_username: { type: String },
     post: { type: String, required: true },
     comments: [CommentSchema],
     image: { type: String },

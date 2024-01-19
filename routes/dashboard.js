@@ -80,6 +80,8 @@ router.post(
                 console.log("No file provided");
                 const newPost = new Post({
                     author: req.user._id,
+                    author_name: req.user.name,
+                    author_username: req.user.username,
                     post: req.body.post,
                     image: null,
                 });
@@ -109,6 +111,8 @@ router.post(
 
                 const newPost = new Post({
                     author: req.user._id,
+                    author_name: req.user.name,
+                    author_username: req.user.username,
                     post: req.body.post,
                     image: imageUrl,
                 });
@@ -142,6 +146,8 @@ router.post(
         // Create a new comment
         const newComment = {
             author: req.user._id,
+            author_name: req.user.name,
+            author_username: req.user.username,
             content: content,
         };
 
