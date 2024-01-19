@@ -139,7 +139,7 @@ router.post(
     })
 );
 
-// POST for comments form
+// POST for comments
 router.post(
     "/comments",
     asyncHandler(async (req, res, next) => {
