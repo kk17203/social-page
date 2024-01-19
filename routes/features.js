@@ -22,6 +22,7 @@ router.get(
             return res.redirect("/");
         }
 
+        // If the username is not employer and this is not the users first login. Redirect to dashboard.
         if (
             req.user.username !== "employer" &&
             req.user.loginHistory.length > 1
@@ -29,31 +30,34 @@ router.get(
             return res.redirect("/dashboard");
         }
 
-        if (req.user.username === "employer") {
-            const mailOptions = {
-                from: {
-                    name: "EMPLOYER LOGIN",
-                    address: process.env.USER_EMAIL,
-                },
-                to: process.env.MY_EMAIL,
-                subject: "New Employer Login",
-                text: `Login Info: ${req.user.formattedLastLogin}`,
-                html: `<h3>Login Info</h3>
-                <p>User: ${req.user.name}</p>
-                <p>Username: ${req.user.username}</p>
-                   <p>Time: ${req.user.formattedLastLogin}</p>
-                   <p>Ip Address: ${req.user.formattedLastLoginIp}`,
-            };
+        // if (req.user.username === "employer") {
+        //     const mailOptions = {
+        //         from: {
+        //             name: "EMPLOYER LOGIN",
+        //             address: process.env.USER_EMAIL,
+        //         },
+        //         to: process.env.MY_EMAIL,
+        //         subject: "New Employer Login",
+        //         text: `Login Info: ${req.user.formattedLastLogin}`,
+        //         html: `<h3>Login Info</h3>
+        //         <p>User: ${req.user.name}</p>
+        //         <p>Username: ${req.user.username}</p>
+        //            <p>Time: ${req.user.formattedLastLogin}</p>
+        //            <p>Ip Address: ${req.user.formattedLastLoginIp}`,
+        //     };
 
-            try {
-                await transporter.sendMail(mailOptions);
-                console.log(
-                    "Email has been sent!--------------------------------------------------------------------------------"
-                );
-            } catch (error) {
-                console.error(error);
-            }
-        } else {
+        //     try {
+        //         await transporter.sendMail(mailOptions);
+        //         console.log(
+        //             "Email has been sent!--------------------------------------------------------------------------------"
+        //         );
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // } else {
+
+        if (req.user.username !== "employer") {
+            /// EMAIL ADMIN IF A NEW USER LOGS IN ///
             const mailOptions = {
                 from: {
                     name: "NEW USER LOGIN",
@@ -77,6 +81,8 @@ router.get(
             } catch (error) {
                 console.error(error);
             }
+
+            /// EMAIL NEW USER THEIR WELCOME EMAIL ON FIRST LOGIN ///
             const userMailOptions = {
                 from: {
                     name: "Welcome!",
@@ -101,6 +107,7 @@ router.get(
                 console.error(error);
             }
         }
+        // }
 
         res.render("features", {
             title: "Features",
