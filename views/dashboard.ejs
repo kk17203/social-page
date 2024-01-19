@@ -62,10 +62,7 @@
                 <!-- If there are posts  -->
                 <% if(posts) { %>
                 <!-- Loop through each one  -->
-                <% posts.forEach(function(post, index) { %> <%
-                <!-- checks if post is from the current user or from a user the current one follows  -->
-                if(post.author._id.toString() === user._id.toString() ||
-                user.followed.includes(post.author._id)) { %>
+                <% posts.forEach(function(post, index) { %>
                 <div class="post-container">
                     <div class="post-header">
                         <div class="user-link">
@@ -223,7 +220,15 @@
                         </div>
                     </div>
                 </div>
-                <% } %> <% }) %> <% } %>
+                <% }) %> <% } %>
+                <!-- If there are no posts or posts are less than 2 -->
+                <% if(!posts || posts.length < 2) { %>
+                <div class="post-container">
+                    <div class="few-posts-message">
+                        <p>Follow More Users To See More Content</p>
+                    </div>
+                </div>
+                <% } %>
             </div>
         </div>
     </body>

@@ -436,3 +436,9 @@
     color: rgba(87, 86, 86, 0.751);
     font-size: 0.9rem;
 }
+
+.few-posts-message {
+    display: flex;
+    justify-content: center;
+    color: rgba(87, 86, 86, 0.751);
+}

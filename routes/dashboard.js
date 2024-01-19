@@ -16,10 +16,20 @@ router.get(
             return res.redirect("/");
         }
 
-        const posts = await Post.find({})
+        // const posts = await Post.find({})
+        //     .populate("comments.author")
+        //     .sort({ timestamp: -1 })
+        //     .populate("author"); // Find all Posts and Populate the 'author' field in the 'posts' array
+
+        const posts = await Post.find({
+            $or: [
+                { author: req.user._id },
+                { author: { $in: req.user.followed } },
+            ],
+        })
             .populate("comments.author")
             .sort({ timestamp: -1 })
-            .populate("author"); // Find all Posts and Populate the 'author' field in the 'posts' array
+            .populate("author");
 
         res.render("dashboard", {
             title: "Dashboard",

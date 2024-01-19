@@ -27,12 +27,15 @@ router.get(
             _id: { $in: user.followed },
         });
 
-        const posts = await Post.find({})
+        const posts = await Post.find({
+            author: { $in: user._id },
+        })
             .populate("comments.author")
             .sort({ timestamp: -1 })
             .populate("author"); // Find all Posts and Populate the 'author' field in the 'posts' array
-        console.log(user._id.toString());
-        console.log(req.user._id.toString());
+
+        console.log(posts);
+
         res.render("userPage", {
             title: "User Page",
             user: user,
